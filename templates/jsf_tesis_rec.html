@@ -1,0 +1,708 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <meta name="generator" content="PhpSpreadsheet, https://github.com/PHPOffice/PhpSpreadsheet">
+      <meta name="author" content="x" />
+
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+    <style type="text/css">
+      html { font-family:Calibri, Arial, Helvetica, sans-serif; font-size:11pt; background-color:white }
+      a.comment-indicator:hover + div.comment { background:#ffd; position:absolute; display:block; border:1px solid black; padding:0.5em }
+      a.comment-indicator { background:red; display:inline-block; border:1px solid black; width:0.5em; height:0.5em }
+      div.comment { display:none }
+      table { border-collapse:collapse; page-break-after:always }
+      .gridlines td { border:1px dotted black }
+      .gridlines th { border:1px dotted black }
+      .b { text-align:center }
+      .e { text-align:center }
+      .f { text-align:right }
+      .inlineStr { text-align:left }
+      .n { text-align:right }
+      .s { text-align:left }
+      td.style0 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      th.style0 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      td.style1 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; text-decoration:underline; color:#0563C1; font-family:'Calibri'; font-size:11pt; background-color:white }
+      th.style1 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; text-decoration:underline; color:#0563C1; font-family:'Calibri'; font-size:11pt; background-color:white }
+      td.style2 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      th.style2 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      td.style3 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      th.style3 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      td.style4 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:#F7CAAC }
+      th.style4 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:#F7CAAC }
+      td.style5 { vertical-align:bottom; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:9pt; background-color:white }
+      th.style5 { vertical-align:bottom; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:9pt; background-color:white }
+      td.style6 { vertical-align:bottom; text-align:center; border-bottom:none #000000; border-top:1px solid #000000 !important; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:9pt; background-color:white }
+      th.style6 { vertical-align:bottom; text-align:center; border-bottom:none #000000; border-top:1px solid #000000 !important; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:9pt; background-color:white }
+      td.style7 { vertical-align:bottom; text-align:center; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:9pt; background-color:white }
+      th.style7 { vertical-align:bottom; text-align:center; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:9pt; background-color:white }
+      td.style8 { vertical-align:bottom; text-align:center; border-bottom:1px solid #000000 !important; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:9pt; background-color:white }
+      th.style8 { vertical-align:bottom; text-align:center; border-bottom:1px solid #000000 !important; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Times New Roman'; font-size:9pt; background-color:white }
+      td.style9 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#B15D24; font-family:'Calibri'; font-size:11pt; background-color:white }
+      th.style9 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#B15D24; font-family:'Calibri'; font-size:11pt; background-color:white }
+      td.style10 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; font-weight:bold; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      th.style10 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; font-weight:bold; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      td.style11 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      th.style11 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      td.style12 { vertical-align:middle; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      th.style12 { vertical-align:middle; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      td.style13 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; font-weight:bold; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      th.style13 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; font-weight:bold; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      td.style14 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      th.style14 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      td.style15 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      th.style15 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      td.style16 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      th.style16 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      td.style17 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      th.style17 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      td.style18 { vertical-align:middle; text-align:center; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      th.style18 { vertical-align:middle; text-align:center; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      td.style19 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:#F7CAAC }
+      th.style19 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:#F7CAAC }
+      td.style20 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:#FBE4D5 }
+      th.style20 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:#FBE4D5 }
+      td.style21 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      th.style21 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      td.style22 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; font-weight:bold; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:#D8D8D8 }
+      th.style22 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; font-weight:bold; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:#D8D8D8 }
+      td.style23 { vertical-align:middle; text-align:center; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      th.style23 { vertical-align:middle; text-align:center; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      td.style24 { vertical-align:middle; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      th.style24 { vertical-align:middle; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      td.style25 { vertical-align:bottom; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; font-weight:bold; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      th.style25 { vertical-align:bottom; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; font-weight:bold; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      td.style26 { vertical-align:bottom; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      th.style26 { vertical-align:bottom; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      td.style27 { vertical-align:bottom; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      th.style27 { vertical-align:bottom; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      td.style28 { vertical-align:middle; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      th.style28 { vertical-align:middle; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      td.style29 { vertical-align:bottom; text-align:center; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      th.style29 { vertical-align:bottom; text-align:center; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      td.style30 { vertical-align:middle; text-align:center; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      th.style30 { vertical-align:middle; text-align:center; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      td.style31 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; text-decoration:underline; color:#0563C1; font-family:'Calibri'; font-size:11pt; background-color:white }
+      th.style31 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; text-decoration:underline; color:#0563C1; font-family:'Calibri'; font-size:11pt; background-color:white }
+      td.style32 { vertical-align:middle; text-align:left; padding-left:0px; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      th.style32 { vertical-align:middle; text-align:left; padding-left:0px; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      td.style33 { vertical-align:bottom; text-align:left; padding-left:0px; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; font-weight:bold; color:#000000; font-family:'CentSchbkCyrill BT'; font-size:11pt; background-color:white }
+      th.style33 { vertical-align:bottom; text-align:left; padding-left:0px; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; font-weight:bold; color:#000000; font-family:'CentSchbkCyrill BT'; font-size:11pt; background-color:white }
+      td.style34 { vertical-align:bottom; text-align:left; padding-left:0px; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      th.style34 { vertical-align:bottom; text-align:left; padding-left:0px; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+      td.style35 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; text-decoration:underline; color:#0563C1; font-family:'Calibri'; font-size:11pt; background-color:white }
+      th.style35 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; text-decoration:underline; color:#0563C1; font-family:'Calibri'; font-size:11pt; background-color:white }
+      table.sheet0 col.col0 { width:36.59999958pt }
+      table.sheet0 col.col1 { width:281.27777455pt }
+      table.sheet0 col.col2 { width:389.04443998pt }
+      table.sheet0 col.col3 { width:42pt }
+      table.sheet0 col.col4 { width:42pt }
+      table.sheet0 tr { height:15pt }
+      table.sheet0 tr.row12 { height:30pt }
+      table.sheet0 tr.row16 { height:45pt }
+      table.sheet0 tr.row25 { height:30pt }
+      table.sheet0 tr.row42 { height:30pt }
+      table.sheet0 tr.row47 { height:150pt }
+      table.sheet0 tr.row51 { height:30pt }
+      table.sheet0 tr.row54 { height:30pt }
+      table.sheet0 tr.row55 { height:30pt }
+      table.sheet0 tr.row56 { height:30pt }
+      table.sheet0 tr.row57 { height:30pt }
+      table.sheet0 tr.row68 { height:30pt }
+      table.sheet0 tr.row69 { height:30pt }
+      table.sheet0 tr.row71 { height:30pt }
+      table.sheet0 tr.row72 { height:30pt }
+      table.sheet0 tr.row78 { height:105pt }
+    </style>
+  </head>
+
+  <body>
+    {% include 'includes/_navbar.html' %}
+<style>
+@page { margin-left: 0.7in; margin-right: 0.7in; margin-top: 0.75in; margin-bottom: 0.75in; }
+body { margin-left: 0.7in; margin-right: 0.7in; margin-top: 0.75in; margin-bottom: 0.75in; }
+</style>
+    <table border="0" cellpadding="0" cellspacing="0" id="sheet0" class="sheet0 gridlines">
+        <col class="col0">
+        <col class="col1">
+        <col class="col2">
+        <col class="col3">
+        <col class="col4">
+        <tbody>
+          <tr class="row0">
+            <td class="column0 style33 s style33" colspan="4">TESIS PROCESO ALGORÍTMICO PARA RECUPERACIÓN EFICIENTE DE TEXTO HISTÓRICO Y GESTIÓN  DOCUMENTAL</td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row1">
+            <td class="column0 style3 n">1</td>
+            <td class="column1 style14 s">Plantilla word</td>
+            <td class="column2 style14 s">https://www.youtube.com/watch?v=7cpHRVqzS6o</td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row2">
+            <td class="column0 style3 null"></td>
+            <td class="column1 style14 null"></td>
+            <td class="column2 style14 s">A Complete Optical Character Recognition Methodology for Historical Documents</td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row3">
+            <td class="column0 style3 n">2</td>
+            <td class="column1 style34 s">Desbloquea pdf</td>
+            <td class="column2 style35 s"><a href="https://online2pdf.com/es/" title="">https://online2pdf.com/es/</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row4">
+            <td class="column0 style3 null"></td>
+            <td class="column1 style14 null"></td>
+            <td class="column2 style14 s">Arkan Mahmood , Ibrahim Taner Okumus</td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row5">
+            <td class="column0 style3 n">3</td>
+            <td class="column1 style14 s">NIST Special Database 19</td>
+            <td class="column2 style35 s"><a href="https://www.nist.gov/srd/nist-special-database-19" title="">https://www.nist.gov/srd/nist-special-database-19</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row6">
+            <td class="column0 style3 n">4</td>
+            <td class="column1 style14 s">NIST Special Database 302</td>
+            <td class="column2 style35 s"><a href="https://www.nist.gov/itl/iad/image-group/nist-special-database-302" title="">https://www.nist.gov/itl/iad/image-group/nist-special-database-302</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row7">
+            <td class="column0 style3 n">5</td>
+            <td class="column1 style14 s">CENPARMI</td>
+            <td class="column2 style35 s">https://www.concordia.ca/research/cenparmi/about.html</td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row8">
+            <td class="column0 style3 n">6</td>
+            <td class="column1 style14 s">Kimnia Datset</td>
+            <td class="column2 style35 s"><a href="https://kimialab.uwaterloo.ca/kimia/index.php/pathology-images-kimia-path24/" title="">https://kimialab.uwaterloo.ca/kimia/index.php/pathology-images-kimia-path24/</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row9">
+            <td class="column0 style3 n">7</td>
+            <td class="column1 style14 s">Weka 3.0</td>
+            <td class="column2 style35 s"><a href="https://www.cs.waikato.ac.nz/ml/weka/" title="">https://www.cs.waikato.ac.nz/ml/weka/</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row10">
+            <td class="column0 style3 null"></td>
+            <td class="column1 style14 null"></td>
+            <td class="column2 style35 s"><a href="https://sourceforge.net/projects/weka/" title="">https://sourceforge.net/projects/weka/</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row11">
+            <td class="column0 style3 null"></td>
+            <td class="column1 style14 null"></td>
+            <td class="column2 style35 s"><a href="https://www.filehorse.com/es/descargar-weka/" title="">https://www.filehorse.com/es/descargar-weka/</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row12">
+            <td class="column0 style3 n">8</td>
+            <td class="column1 style14 s">Endeavour MerKator,software for cross-species gene prioritization</td>
+            <td class="column2 style14 null"></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row13">
+            <td class="column0 style3 n">9</td>
+            <td class="column1 style14 null"></td>
+            <td class="column2 style35 s"><a href="https://hal.archives-ouvertes.fr/hal-00867225" title="">https://hal.archives-ouvertes.fr/hal-00867225</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row14">
+            <td class="column0 style3 n">10</td>
+            <td class="column1 style14 s">Librería JMathPlot</td>
+            <td class="column2 style35 s"><a href="https://github.com/yannrichet/jmathplot" title="">https://github.com/yannrichet/jmathplot</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row15">
+            <td class="column0 style3 n">11</td>
+            <td class="column1 style14 s">Librería Imshow</td>
+            <td class="column2 style35 s"><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.imshow.html" title="">https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.imshow.html</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row16">
+            <td class="column0 style3 n">12</td>
+            <td class="column1 style14 s">Tess2Speech: An Intelligent Character<br />
+Recognition-To-Speech Application for Android Using Google’s Tesseract Optical Character Recognition Engine</td>
+            <td class="column2 style14 s">Tess2Speech/tess2Speech/src/main/java/anteraaron/tess2speech/Fragment\_ConvertedText.java</td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row17">
+            <td class="column0 style3 n">13</td>
+            <td class="column1 style14 s">RIMES database</td>
+            <td class="column2 style35 s"><a href="https://paperswithcode.com/dataset/rimes" title="">https://paperswithcode.com/dataset/rimes</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row18">
+            <td class="column0 style3 n">14</td>
+            <td class="column1 style32 s">Handwriting to Speech App</td>
+            <td class="column2 style35 s"><a href="https://apps.apple.com/us/app/handyspeech/id563600464" title="">https://apps.apple.com/us/app/handyspeech/id563600464</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row19">
+            <td class="column0 style3 n">15</td>
+            <td class="column1 style14 s">LeNet</td>
+            <td class="column2 style35 s"><a href="https://github.com/mhraza95/Digit-Recognition-LeNet" title="">https://github.com/mhraza95/Digit-Recognition-LeNet</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row20">
+            <td class="column0 style3 n">16</td>
+            <td class="column1 style14 s">ANNA neural net chip</td>
+            <td class="column2 style35 s"><a href="https://ieeexplore.ieee.org/document/129422" title="">https://ieeexplore.ieee.org/document/129422</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row21">
+            <td class="column0 style3 n">17</td>
+            <td class="column1 style14 s">International Conference on Document Analysis and Recognition</td>
+            <td class="column2 style35 s"><a href="https://icdar2023.org/" title="">https://icdar2023.org/</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row22">
+            <td class="column0 style3 n">18</td>
+            <td class="column1 style14 s">NHOCR carácter japones</td>
+            <td class="column2 style35 s"><a href="https://github.com/fireae/nhocr" title="">https://github.com/fireae/nhocr</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row23">
+            <td class="column0 style3 n">19</td>
+            <td class="column1 style14 s">Tess4J</td>
+            <td class="column2 style35 s"><a href="http://tess4j.sourceforge.net/" title="">http://tess4j.sourceforge.net/</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row24">
+            <td class="column0 style3 n">20</td>
+            <td class="column1 style14 s">WeOCR</td>
+            <td class="column2 style35 s"><a href="http://weocr.ocrgrid.org/" title="">http://weocr.ocrgrid.org/</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4 style2 null"></td>
+          </tr>
+          <tr class="row25">
+            <td class="column0 style3 n">21</td>
+            <td class="column1 style14 s">algoritmos, Levenshtein y Brew hallan cantidad caracteres diferentes en una cadena de texto respecto a otra</td>
+            <td class="column2 style35 s"><a href="https://sites.google.com/site/algoritmossimilaridaddistancia/distancia-de-levenshtein" title="">https://sites.google.com/site/algoritmossimilaridaddistancia/distancia-de-levenshtein</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row26">
+            <td class="column0 style3 n">22</td>
+            <td class="column1 style14 s">OCRopus</td>
+            <td class="column2 style35 s"><a href="https://github.com/ocropus/ocropy" title="">https://github.com/ocropus/ocropy</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row27">
+            <td class="column0 style3 n">23</td>
+            <td class="column1 style14 s">Weka 3.0</td>
+            <td class="column2 style35 s"><a href="https://sourceforge.net/projects/weka/" title="">https://sourceforge.net/projects/weka/</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row28">
+            <td class="column0 style3 n">24</td>
+            <td class="column1 style14 s">Gamera, reconocimieno de documentos</td>
+            <td class="column2 style35 s"><a href="https://gamera.informatik.hsnr.de/download/index.html" title="">https://gamera.informatik.hsnr.de/download/index.html</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row29">
+            <td class="column0 style3 n">25</td>
+            <td class="column1 style14 s">NLTK, kit herramientas lenguaje natural</td>
+            <td class="column2 style35 s"><a href="https://www.nltk.org/data.html" title="">https://www.nltk.org/data.html</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row30">
+            <td class="column0 style3 n">26</td>
+            <td class="column1 style14 s">Analizador sintáctico Stanford</td>
+            <td class="column2 style35 s"><a href="https://github.com/jomali/CS143-Compilers-Stanford" title="">https://github.com/jomali/CS143-Compilers-Stanford</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row31">
+            <td class="column0 style3 n">27</td>
+            <td class="column1 style14 s">ISO 15489</td>
+            <td class="column2 style35 s"><a href="https://www.uma.es/media/tinyimages/file/ISO_15489.2.pdf" title="">https://www.uma.es/media/tinyimages/file/ISO_15489.2.pdf</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row32">
+            <td class="column0 style3 n">28</td>
+            <td class="column1 style14 s">ISO 23081 metadatos gestion documental</td>
+            <td class="column2 style35 s"><a href="https://www.uma.es/media/tinyimages/file/ISO.23081.Parte_2.pdf" title="">https://www.uma.es/media/tinyimages/file/ISO.23081.Parte_2.pdf</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row33">
+            <td class="column0 style3 n">29</td>
+            <td class="column1 style14 s">Sobel Edge detection</td>
+            <td class="column2 style35 s"><a href="https://stackoverflow.com/questions/41468661/sobel-edge-detecting-program-in-java" title="">https://stackoverflow.com/questions/41468661/sobel-edge-detecting-program-in-java</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row34">
+            <td class="column0 style3 n">30</td>
+            <td class="column1 style14 s">TeXTract</td>
+            <td class="column2 style35 s"><a href="https://www.texyz.com/textract/download/index.htm" title="">https://www.texyz.com/textract/download/index.htm</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row35">
+            <td class="column0 style3 n">31</td>
+            <td class="column1 style14 s">Aylien, herramienta procesa lenguaje natural</td>
+            <td class="column2 style35 s"><a href="https://aylien.com/" title="">https://aylien.com/</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row36">
+            <td class="column0 style3 n">32</td>
+            <td class="column1 style14 s">ClearTK, librería aprendizaje maquina lenguaje natural</td>
+            <td class="column2 style35 s"><a href="https://cleartk.github.io/cleartk/" title="">https://cleartk.github.io/cleartk/</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row37">
+            <td class="column0 style3 n">33</td>
+            <td class="column1 style14 s">IAM Handwriting Database</td>
+            <td class="column2 style35 s"><a href="https://fki.tic.heia-fr.ch/databases/iam-handwriting-database" title="">https://fki.tic.heia-fr.ch/databases/iam-handwriting-database</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row38">
+            <td class="column0 style3 n">34</td>
+            <td class="column1 style14 s">CMU-Cambridge Statistical Language Modeling toolkit</td>
+            <td class="column2 style35 s"><a href="https://github.com/quinnj/WinCMUToolkit" title="">https://github.com/quinnj/WinCMUToolkit</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row39">
+            <td class="column0 style3 n">35</td>
+            <td class="column1 style14 s">Hidden Markov Model ToolKit</td>
+            <td class="column2 style35 s"><a href="https://github.com/mxochicale/htk" title="">https://github.com/mxochicale/htk</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row40">
+            <td class="column0 style3 n">36</td>
+            <td class="column1 style14 s">Noticia histórica de las fiestas con que Valencia</td>
+            <td class="column2 style35 s"><a href="https://bivaldi.gva.es/es/consulta/registro.cmd?id=281" title="">https://bivaldi.gva.es/es/consulta/registro.cmd?id=281</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row41">
+            <td class="column0 style3 n">37</td>
+            <td class="column1 style14 s">Biblioteca para máquina de vectores de soporte</td>
+            <td class="column2 style35 s"><a href="https://www.csie.ntu.edu.tw/~cjlin/libsvm/" title="">https://www.csie.ntu.edu.tw/~cjlin/libsvm/</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row42">
+            <td class="column0 style3 n">38</td>
+            <td class="column1 style14 s">Librería de reconocimiento de patrones y aprendizaje de maquina</td>
+            <td class="column2 style35 s"><a href="http://cmp.felk.cvut.cz/cmp/software/stprtool/" title="">http://cmp.felk.cvut.cz/cmp/software/stprtool/</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row43">
+            <td class="column0 style3 n">39</td>
+            <td class="column1 style14 s">OCRopus herramienta libre</td>
+            <td class="column2 style35 s">https://github.com/ocropus/ocropy</td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row44">
+            <td class="column0 style3 n">40</td>
+            <td class="column1 style14 s">Stanford parser</td>
+            <td class="column2 style35 s"><a href="https://nlp.stanford.edu/software/lex-parser.html" title="">https://nlp.stanford.edu/software/lex-parser.html</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row45">
+            <td class="column0 style3 n">41</td>
+            <td class="column1 style14 s">Kit Herramientas de lenguaje natural</td>
+            <td class="column2 style35 s"><a href="https://www.nltk.org/install.html" title="">https://www.nltk.org/install.html</a></td>
+            <td class="column3 style31 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row46">
+            <td class="column0 style3 n">42</td>
+            <td class="column1 style14 s">Minería de textos</td>
+            <td class="column2 style35 s">http://ftp.sas.com/techsup/download/hotfix/tmine_home.html</td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row47">
+            <td class="column0 style3 n">43</td>
+            <td class="column1 style14 s">Google Cloud Platform</td>
+            <td class="column2 style14 s">https://console.cloud.google.com/freetrial/signup/tos?facet_url=https:%2F%2Fcloud.google.com%2Ffree&amp;hl=es&amp;_ga=2.201967957.554502665.1687056579-1573865815.1687056579&amp;_gac=1.81399525.1687056710.CjwKCAjws7WkBhBFEiwAIi1688QOeAFG0F_WxnaNEqZxkZUQMPjN6qC3x2-vpYR0GxNffvQHwe6bXRoCSv0QAvD_BwE&amp;facet_utm_source=google&amp;facet_utm_campaign=latam-LATAM-all-es-dr-AKWS-all-all-trial-e-dr-1011454-LUAC0013610&amp;facet_utm_medium=cpc&amp;facet_id_list=%5B39300012,%2039300020,%2039300118,%2039300196,%2039300251,%2039300318,%2039300322,%2039300324,%2039300333,%2039300345,%2039300354,%2039300363,%2039300374,%2039300412,%2039300422,%2039300436,%2039300471,%2039300488%5D&amp;pli=1</td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row48">
+            <td class="column0 style3 n">44</td>
+            <td class="column1 style14 s">ImageJ</td>
+            <td class="column2 style35 s"><a href="https://imagej.nih.gov/ij/download.html" title="">https://imagej.nih.gov/ij/download.html</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row49">
+            <td class="column0 style3 n">45</td>
+            <td class="column1 style14 s">Algoritmo Otsu</td>
+            <td class="column2 style35 s"><a href="https://github.com/JasonAltschuler/Otsu/blob/master/Otsu.java" title="">https://github.com/JasonAltschuler/Otsu/blob/master/Otsu.java</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row50">
+            <td class="column0 style3 n">46</td>
+            <td class="column1 style14 s">Conjunto de datos imágenes (100)</td>
+            <td class="column2 style35 s"><a href="https://github.com/jbisiach/ImageDataset100.git" title="">https://github.com/jbisiach/ImageDataset100.git </a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row51">
+            <td class="column0 style3 n">47</td>
+            <td class="column1 style14 s">CEDAR Centre of Excellence for Document Analysis and Recognition</td>
+            <td class="column2 style35 s"><a href="https://cedar.buffalo.edu/" title="">https://cedar.buffalo.edu/</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row52">
+            <td class="column0 style3 n">48</td>
+            <td class="column1 style14 s">Detectron2, marco de detección de objetos</td>
+            <td class="column2 style35 s">https://github.com/facebookresearch/detectron2</td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row53">
+            <td class="column0 style3 n">49</td>
+            <td class="column1 style14 s">Pytorch, marco de aprendizaje automático de código abierto</td>
+            <td class="column2 style35 s"><a href="https://pytorch.org/" title="">https://pytorch.org/</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row54">
+            <td class="column0 style3 n">50</td>
+            <td class="column1 style14 s">Torchvision, Biblioteca construida en PyTorch, que contiene conjuntos de datos populares</td>
+            <td class="column2 style35 s"><a href="https://pypi.org/project/torchvision/" title="">https://pypi.org/project/torchvision/</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row55">
+            <td class="column0 style3 n">51</td>
+            <td class="column1 style14 s">scikit-learn, Biblioteca de aprendizaje automático de código abierto</td>
+            <td class="column2 style35 s">https://scikit-learn.org/stable/</td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row56">
+            <td class="column0 style3 n">52</td>
+            <td class="column1 style14 s">OpenCV, Biblioteca de funciones de programación para visión por computador</td>
+            <td class="column2 style35 s">https://opencv.org/releases/</td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row57">
+            <td class="column0 style3 n">53</td>
+            <td class="column1 style14 s">Streamlit, Marco de código abierto, para crear prototipos de aprendizaje automático</td>
+            <td class="column2 style35 s"><a href="https://streamlit.io/" title="">https://streamlit.io/</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row58">
+            <td class="column0 style3 n">54</td>
+            <td class="column1 style14 s">GVF Snake algorithm in java</td>
+            <td class="column2 style35 s"><a href="https://github.com/emersonmoretto/snakegvf" title="">https://github.com/emersonmoretto/snakegvf</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row59">
+            <td class="column0 style3 n">55</td>
+            <td class="column1 style14 s">Traductor en linea de video</td>
+            <td class="column2 style35 s"><a href="https://editor.flixier.com/home/projects" title="">https://editor.flixier.com/home/projects</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row60">
+            <td class="column0 style3 n">56</td>
+            <td class="column1 style14 s">snake gvf_1_Kapoor GitHub</td>
+            <td class="column2 style35 s"><a href="https://gist.github.com/lohit-kapoor/61c9c5fb14fc3f9e3d78f0db48e13378" title="">https://gist.github.com/lohit-kapoor/61c9c5fb14fc3f9e3d78f0db48e13378</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row61">
+            <td class="column0 style3 n">57</td>
+            <td class="column1 style14 s">Procesamiento de imagen Java</td>
+            <td class="column2 style14 s">https://imagej.net/ij/</td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row62">
+            <td class="column0 style3 n">58</td>
+            <td class="column1 style14 s">Opencv+cpp+eclipse</td>
+            <td class="column2 style35 s"><a href="https://docs.opencv.org/4.x/d7/d16/tutorial_linux_eclipse.html" title="">https://docs.opencv.org/4.x/d7/d16/tutorial_linux_eclipse.html</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row63">
+            <td class="column0 style3 n">59</td>
+            <td class="column1 style14 s">CDT plugin Eclipse</td>
+            <td class="column2 style35 s"><a href="https://github.com/eclipse-cdt" title="">https://github.com/eclipse-cdt</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row64">
+            <td class="column0 style3 n">60</td>
+            <td class="column1 style14 s">Active Contour</td>
+            <td class="column2 style35 s">https://la.mathworks.com/help/images/ref/activecontour.html</td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row65">
+            <td class="column0 style3 n">61</td>
+            <td class="column1 style14 s">formato archivo jpg</td>
+            <td class="column2 style35 s"><a href="https://es.wikipedia.org/wiki/Joint_Photographic_Experts_Group" title="">https://es.wikipedia.org/wiki/Joint_Photographic_Experts_Group</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row66">
+            <td class="column0 style3 n">62</td>
+            <td class="column1 style14 s">formato archivo bmp</td>
+            <td class="column2 style35 s"><a href="https://en.wikipedia.org/wiki/BMP_file_format" title="">https://en.wikipedia.org/wiki/BMP_file_format</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row67">
+            <td class="column0 style3 n">63</td>
+            <td class="column1 style14 s">Convierte PDF en texto editable</td>
+            <td class="column2 style35 s"><a href="https://pdf.wondershare.es/pdf-ocr/ai-ocr-pdf.html" title="">https://pdf.wondershare.es/pdf-ocr/ai-ocr-pdf.html</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row68">
+            <td class="column0 style3 n">64</td>
+            <td class="column1 style14 s">Manipulacion y proceso imágenes</td>
+            <td class="column2 style35 s"><a href="https://claudiovz.github.io/scipy-lecture-notes-ES/advanced/image_processing/index.html" title="">https://claudiovz.github.io/scipy-lecture-notes-ES/advanced/image_processing/index.html</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row69">
+            <td class="column0 style3 n">65</td>
+            <td class="column1 style14 s">Base de datos (caracteres, digitos, documentos, expresiones…)</td>
+            <td class="column2 style35 s"><a href="https://www.quora.com/How-do-I-get-a-dataset-of-broken-printed-characters-and-digits" title="">https://www.quora.com/How-do-I-get-a-dataset-of-broken-printed-characters-and-digits</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row70">
+            <td class="column0 style3 n">66</td>
+            <td class="column1 style14 s">Documentos snake GVF</td>
+            <td class="column2 style35 s">https://iacl.ece.jhu.edu/Projects/gvf/</td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row71">
+            <td class="column0 style3 n">67</td>
+            <td class="column1 style14 s">Recursos</td>
+            <td class="column2 style35 s"><a href="https://claudiovz.github.io/scipy-lecture-notes-ES/advanced/image_processing/index.html" title="">https://claudiovz.github.io/scipy-lecture-notes-ES/advanced/image_processing/index.html</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row72">
+            <td class="column0 style3 n">68</td>
+            <td class="column1 style14 s">Filtro gaussiano</td>
+            <td class="column2 style35 s"><a href="https://fastercapital.com/es/contenido/Suavizado-gaussiano--lograr-una-claridad-de-datos-optima-con-suavizado-gaussiano.html#Introducci-n-al-suavizado-gaussiano" title="">https://fastercapital.com/es/contenido/Suavizado-gaussiano--lograr-una-claridad-de-datos-optima-con-suavizado-gaussiano.html#Introducci-n-al-suavizado-gaussiano</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row73">
+            <td class="column0 style3 n">69</td>
+            <td class="column1 style14 s">Autocorrección Peter Norvig</td>
+            <td class="column2 style35 s"><a href="https://github.com/filyp/autocorrect" title="">https://github.com/filyp/autocorrect</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row74">
+            <td class="column0 style3 null"></td>
+            <td class="column1 style14 null"></td>
+            <td class="column2 style35 s">How to Write a Spelling Corrector</td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row75">
+            <td class="column0 style3 n">70</td>
+            <td class="column1 style14 s">Corpus de Referencia del Español Actual</td>
+            <td class="column2 style35 s"><a href="https://www.rae.es/banco-de-datos/crea" title="">https://www.rae.es/banco-de-datos/crea</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row76">
+            <td class="column0 style3 n">71</td>
+            <td class="column1 style14 s">Plantillas html</td>
+            <td class="column2 style35 s"><a href="https://elements.envato.com/es/web-templates/project" title="">https://elements.envato.com/es/web-templates/project</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row77">
+            <td class="column0 style3 n">72</td>
+            <td class="column1 style14 s">HTML + .py</td>
+            <td class="column2 style35 s"><a href="https://blog.logrocket.com/pyscript-run-python-browser/" title="">https://blog.logrocket.com/pyscript-run-python-browser/</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row78">
+            <td class="column0 style3 n">73</td>
+            <td class="column1 style14 s">Insertar .doc en HTML</td>
+            <td class="column2 style35 s"><a href="https://www.google.com/search?q=insertar+.doc+en+html&amp;sca_esv=39121d5fb8094216&amp;ei=IM39Z7m0A_mB5OUP96qHsAw&amp;ved=0ahUKEwi5xNmZh9mMAxX5ALkGHXfVAcYQ4dUDCBA&amp;uact=5&amp;oq=insertar+.doc+en+html&amp;gs_lp=Egxnd3Mtd2l6LXNlcnAiFWluc2VydGFyIC5kb2MgZW4gaHRtbDIIECEYoAEYwwQyCBAhGKABGMMEMggQIRigARjDBEiXLlDADFjtI3ABeACQAQCYAboBoAG3C6oBAzAuObgBA8gBAPgBAZgCCKACiwnCAgoQABiwAxjWBBhHwgIIEAAYgAQYogTCAggQABiiBBiJBcICBRAAGO8FmAMAiAYBkAYIkgcDMS43oAeMK7IHAzAuN7gHiAk&amp;sclient=gws-wiz-serp" title="">https://www.google.com/search?q=insertar+.doc+en+html&amp;sca_esv=39121d5fb8094216&amp;ei=IM39Z7m0A_mB5OUP96qHsAw&amp;ved=0ahUKEwi5xNmZh9mMAxX5ALkGHXfVAcYQ4dUDCBA&amp;uact=5&amp;oq=insertar+.doc+en+html&amp;gs_lp=Egxnd3Mtd2l6LXNlcnAiFWluc2VydGFyIC5kb2MgZW4gaHRtbDIIECEYoAEYwwQyCBAhGKABGMMEMggQIRigARjDBEiXLlDADFjtI3ABeACQAQCYAboBoAG3C6oBAzAuObgBA8gBAPgBAZgCCKACiwnCAgoQABiwAxjWBBhHwgIIEAAYgAQYogTCAggQABiiBBiJBcICBRAAGO8FmAMAiAYBkAYIkgcDMS43oAeMK7IHAzAuN7gHiAk&amp;sclient=gws-wiz-serp</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row79">
+            <td class="column0 style3 n">74</td>
+            <td class="column1 style14 s">Convertir .doc a .html</td>
+            <td class="column2 style35 s"><a href="https://convertio.co/es/doc-html/" title="">https://convertio.co/es/doc-html/</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row80">
+            <td class="column0 style3 n">75</td>
+            <td class="column1 style14 s">pytorch</td>
+            <td class="column2 style35 s"><a href="https://bookdown.org/content/2274/metodos-de-clasificacion.html" title="">https://bookdown.org/content/2274/metodos-de-clasificacion.html</a></td>
+            <td class="column3 style3 null"></td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+          <tr class="row81">
+            <td class="column0 style3 n">76</td>
+            <td class="column1 style14 s">Jose Lombardi</td>
+            <td class="column2 style35 s"><a href="mailto:joselombardi0@gmail.com" title="">joselombardi0@gmail.com</a></td>
+            <td class="column3 style3 n">997965931</td>
+            <td class="column4">&nbsp;</td>
+          </tr>
+        </tbody>
+    </table>
+  </body>
+</html>

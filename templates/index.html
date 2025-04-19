@@ -1,0 +1,19 @@
+
+{% extends 'layout.html' %}
+
+
+{% block body %}
+<div class="jumbotron">
+    <h1 class="display-4">Tesis: </h1>
+    <h1 class="display-4">{{ app_data['titulo'] }} </h1>
+    <p class="lead">Para optar el titulo de Doctor de {{ app_data['autor'] }}</p>
+    <p>En: {{ app_data['especial'] }}</p>
+
+    <hr class="my-4">
+    <p>Investigación de algoritmos aplicados a recuperación textual de documentación histórica</p>
+    <a class="btn btn-primary btn-lg" href="/contacto" role="button">Contacto</a>
+  </div>
+  <div id="micontenido">
+</div>
+
+{% endblock %}
