@@ -53,7 +53,7 @@ def service():
 
 @app.route("/codigo")
 def contact():
-    return render_template("codigo.html", app_data=app_data)
+    return render_template("codigo1.html", app_data=app_data)
 
 @app.route("/recursos")
 def recursos():
@@ -68,26 +68,31 @@ def uploader():
     if request.method == "POST":
         f = request.files['archivo']
 #        f = request.FILES['ufile'].file.name
-        filename = secure_filename(f.filename)
-        filename1 = os.path.join('assets', filename)
-        print("filename: ",filename)
-        print("filename1: ",filename1)
+        filename = secure_filename(f.filename)           # Nom Arch
+        filename1 = os.path.join('static', filename)     # Ruta+nom Arch
+        fn,ex = os.path.splitext(filename)               # Nom Arch, Ext
+#        print("filename: ",filename)
+#        print("filename1: ",filename1)
         imagen = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)
 
         su = request.form.getlist("act")
         for s in su:
 #            print(int(s))
+            mt = ["","","",""]
             if int(s)==1:
-                ocrt(filename,imagen,"0")          # ocr
+                nu="0"
+                mt.insert(0,ocrt(fn,imagen,nu))          # ocr 0
             if int(s)==2:       
-                img = prp1.preproc(imagen)         # preproceso 1
-                ocrt(filename,img,"1")             # ocr
+                nu="1"
+                img = prp1.preproc(imagen)               # preproceso 1
+                mt.insert(1,ocrt(fn,imagen,nu))          # ocr 1
             if int(s)==3:       
-                img = prp2.preproc2(imagen)         # preproceso 2
-                ocrt(filename,img,"2")             # ocr
+                nu="2"
+                img = prp2.preproc2(imagen)              # preproceso 2
+                mt.insert(2,ocrt(fn,imagen,nu))          # ocr 2
 #        mens=mult()
 #        graf()
-    return render_template("codigo.html", app_data=app_data)
+    return render_template("codigo2.html", app_data=app_data, filename1=filename1, txt=mt)
 
 def p_():
     f = request.files['archivo']
@@ -109,10 +114,11 @@ def p_():
 def ocrt(fn,img,nu):
     pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
     txt = pytesseract.image_to_string(img)          # Genera texto
-    n,e = os.path.splitext(fn)                      # separa nombre arch
-    t = open (os.path.join('models',n+nu),'w')
-    t.write(txt)
-    t.close()
+#    n,e = os.path.splitext(fn)                      # separa nombre arch
+    tx = open (os.path.join('static',fn+nu+".txt"),'w')
+    tx.write(txt)
+    tx.close()
+    return txt
 
 if __name__ == "__main__":
     app.run(debug=DEVELOPMENT_ENV)

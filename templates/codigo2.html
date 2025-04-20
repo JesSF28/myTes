@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    {% set languages = ["HTML", "CSS", "Javascript", "Python", "Ruby", "PHP", "Java"] %}
+
+    <form action="/codigo" enctype="multipart/form-data">
+        <h1>RESULTADOS: </h1>;
+        <ul>
+        {% for n in range(0,3) %}
+            {%  if n==0        %}
+        <hr />
+    <div class="container">
+        <figure>
+            <figcaption style="text-align: center;"><code>Imagen</code></figcaption>
+            <img src="{{ filename1 }}" alt="Imagen" class="image" alt="IMAGEN 1">
+        </figure>
+        <figure>
+            <figcaption style="text-align: center;"><code>Texto</code></figcaption>
+            <div class="text">{{ txt[n] }}</div>
+        </figure>
+        <figure>
+            <figcaption style="text-align: center;"><code>% Reconocimiento</code></figcaption>
+            <div class="text">{{ txt[0] }}</div>
+        </figure>
+    </div>
+
+        {%  endif %}
+        {%  endfor %}
+        <hr />
+        </ul>
+    <!--a href="templates/codigo1.html">Regresar</a-->
+    <p><input type="submit" value="Otra prueba"></p>
+    </form>
+{% endblock %}
