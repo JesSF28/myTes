@@ -6,13 +6,13 @@
     <form action="/codigo" enctype="multipart/form-data">
         <h1>RESULTADOS: </h1>;
         <ul>
-        {% for n in range(0,3) %}
-            {%  if n==0        %}
-        <hr />
+            {% for n in range(0,3) %}
+            {% if n<2 %}
+            <hr />
     <div class="container">
         <figure>
             <figcaption style="text-align: center;"><code>Imagen</code></figcaption>
-            <img src="{{ filename1 }}" alt="Imagen" class="image" alt="IMAGEN 1">
+            <img src="{{ fn1[n] }}" alt="Imagen" class="image" alt="IMAGEN 1">
         </figure>
         <figure>
             <figcaption style="text-align: center;"><code>Texto</code></figcaption>
@@ -20,12 +20,12 @@
         </figure>
         <figure>
             <figcaption style="text-align: center;"><code>% Reconocimiento</code></figcaption>
-            <div class="text">{{ txt[0] }}</div>
+            <div class="text">65%</div>
         </figure>
     </div>
 
-        {%  endif %}
-        {%  endfor %}
+            {%  endif %}
+            {%  endfor %}
         <hr />
         </ul>
     <!--a href="templates/codigo1.html">Regresar</a-->

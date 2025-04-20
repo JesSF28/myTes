@@ -66,33 +66,40 @@ def contacto():
 @app.route("/uploader", methods=['POST'])
 def uploader():
     if request.method == "POST":
+        ruta="static"
         f = request.files['archivo']
 #        f = request.FILES['ufile'].file.name
         filename = secure_filename(f.filename)           # Nom Arch
-        filename1 = os.path.join('static', filename)     # Ruta+nom Arch
+        filename1 = os.path.join(ruta, filename)     # Ruta+nom Arch
         fn,ex = os.path.splitext(filename)               # Nom Arch, Ext
 #        print("filename: ",filename)
 #        print("filename1: ",filename1)
         imagen = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)
 
         su = request.form.getlist("act")
+        mtxt = ["","","",""]
+        mimg = ["","","",""]
         for s in su:
-#            print(int(s))
-            mt = ["","","",""]
+            print(int(s))
             if int(s)==1:
                 nu="0"
-                mt.insert(0,ocrt(fn,imagen,nu))          # ocr 0
+                mtxt.insert(0,ocrt(fn,imagen,nu))          # imagen original, ocr 0
+                mimg.insert(0,filename1)
             if int(s)==2:       
                 nu="1"
-                img = prp1.preproc(imagen)               # preproceso 1
-                mt.insert(1,ocrt(fn,imagen,nu))          # ocr 1
+                img,fn1 = prp1.preproc(imagen,fn+nu,ruta)               # imagen de preproceso 1
+                mtxt.insert(1,ocrt(fn,img,nu))          # ocr 1
+                mimg.insert(1,fn1)
             if int(s)==3:       
                 nu="2"
                 img = prp2.preproc2(imagen)              # preproceso 2
-                mt.insert(2,ocrt(fn,imagen,nu))          # ocr 2
+                mtxt.insert(2,ocrt(fn,imagen,nu))          # ocr 2
+            print("mtxt: ",mtxt)
+            print("mimg: ",mimg)
 #        mens=mult()
 #        graf()
-    return render_template("codigo2.html", app_data=app_data, filename1=filename1, txt=mt)
+#    return render_template("codigo2.html", app_data=app_data, filename1=filename1, txt=mtxt)
+    return render_template("codigo2.html", app_data=app_data, fn1=mimg, txt=mtxt)
 
 def p_():
     f = request.files['archivo']

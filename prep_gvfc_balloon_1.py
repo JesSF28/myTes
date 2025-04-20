@@ -127,7 +127,7 @@ def BoundMirrorExpand(A):
 def BoundMirrorShrink(A):
 	return A[1:-1, 1:-1]
 
-def preproc(image):
+def preproc(image,fn,ruta):
 #if __name__ == "__main__":
 	# Cargar la imagen
 #	filename = "car_2.bmp"
@@ -208,9 +208,14 @@ def preproc(image):
 #    plt.subplot(132)
 #    plt.imshow(np.sqrt(u**2 + v**2), cmap="gray")
     img2 = plt.imshow(np.sqrt(u**2 + v**2), cmap="gray_r")
-    plt.savefig('testplot.png')
-    img2
-    plt.title("Resultado 2: Magnitud Campo GVF")
+#    plt.savefig('testplot.png')
+    fn1=os.path.join(ruta, fn+".jpg")
+#    plt.figure(figsize=(2, 1))
+    plt.gca().set_axis_off()
+    plt.savefig(fn1, dpi=100, bbox_inches='tight')
+
+#    img2
+#    plt.title("Resultado 2: Magnitud Campo GVF")
 
 #    ax = fig.add_subplot(133)
 #    ax.set_title("Snake F")
@@ -236,6 +241,8 @@ def preproc(image):
 
 	# Crear la animación
 #    ani = animation.FuncAnimation(fig, update, frames=len(snake_iter), interval=100, repeat=False)
-    plt.show()
+
+#    plt.show()
 	# ani.save('test.mp4')
-    return Image.open('testplot.png')
+    
+    return Image.open(fn1),fn1
