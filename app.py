@@ -79,27 +79,32 @@ def uploader():
         su = request.form.getlist("act")
         mtxt = ["","","",""]
         mimg = ["","","",""]
+        mnum = []
         for s in su:
             print(int(s))
             if int(s)==1:
                 nu="0"
                 mtxt.insert(0,ocrt(fn,imagen,nu))          # imagen original, ocr 0
                 mimg.insert(0,filename1)
+                mnum.insert(0,0)
             if int(s)==2:       
                 nu="1"
                 img,fn1 = prp1.preproc(imagen,fn+nu,ruta)               # imagen de preproceso 1
                 mtxt.insert(1,ocrt(fn,img,nu))          # ocr 1
                 mimg.insert(1,fn1)
+                mnum.insert(1,1)
             if int(s)==3:       
                 nu="2"
                 img = prp2.preproc2(imagen)              # preproceso 2
                 mtxt.insert(2,ocrt(fn,imagen,nu))          # ocr 2
+                mnum.insert(2,2)
             print("mtxt: ",mtxt)
             print("mimg: ",mimg)
+            print("mnum: ",mnum)
 #        mens=mult()
 #        graf()
 #    return render_template("codigo2.html", app_data=app_data, filename1=filename1, txt=mtxt)
-    return render_template("codigo2.html", app_data=app_data, fn1=mimg, txt=mtxt)
+    return render_template("codigo2.html", app_data=app_data, fn1=mimg, txt=mtxt,nu=mnum)
 
 def p_():
     f = request.files['archivo']
