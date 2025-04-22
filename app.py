@@ -5,6 +5,7 @@ PROCESO ALGORITMICO PARA RECUPERACION HISTORICA EFICIENTE GESTION  DOCUMENTAL
 UNSA-FIPS-DCC, 2025
 JMSF
 """
+filename=""
 from flask import Flask, render_template, request
 
 import os
@@ -53,7 +54,8 @@ def service():
 
 @app.route("/codigo")
 def contact():
-    return render_template("codigo1.html", app_data=app_data)
+    global filename
+    return render_template("codigo1.html", app_data=app_data, fn=filename)
 
 @app.route("/recursos")
 def recursos():
@@ -65,39 +67,47 @@ def contacto():
 
 @app.route("/uploader", methods=['POST'])
 def uploader():
+    global filename
     if request.method == "POST":
+        oimg = request.form.get('otra')
+        if oimg=='Otra Imagen':
+            filename=""
+            return render_template("codigo1.html", app_data=app_data, fn=filename)
         ruta="static"
-        f = request.files['archivo']
+        if filename=="":
+            f = request.files['archivo']
 #        f = request.FILES['ufile'].file.name
-        filename = secure_filename(f.filename)           # Nom Arch
-        filename1 = os.path.join(ruta, filename)     # Ruta+nom Arch
+            filename = secure_filename(f.filename)       # Nom Arch
+        filename1 = os.path.join(ruta, filename)         # Ruta+nom Arch
         fn,ex = os.path.splitext(filename)               # Nom Arch, Ext
-#        print("filename: ",filename)
-#        print("filename1: ",filename1)
+        print("filename: ",filename)
+        print("filename1: ",filename1)
+        print("Long filename: ",len(filename))
         imagen = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)
 
         su = request.form.getlist("act")
-        mtxt = ["","","",""]
-        mimg = ["","","",""]
+        print("su:",su)
+        mtxt = []
+        mimg = []
         mnum = []
         for s in su:
             print(int(s))
             if int(s)==1:
                 nu="0"
-                mtxt.insert(0,ocrt(fn,imagen,nu))          # imagen original, ocr 0
-                mimg.insert(0,filename1)
-                mnum.insert(0,0)
+                mtxt.append(ocrt(fn,imagen,nu))          # imagen original, ocr 0
+                mimg.append(filename1)
+                mnum.append(0)
             if int(s)==2:       
                 nu="1"
                 img,fn1 = prp1.preproc(imagen,fn+nu,ruta)               # imagen de preproceso 1
-                mtxt.insert(1,ocrt(fn,img,nu))          # ocr 1
-                mimg.insert(1,fn1)
-                mnum.insert(1,1)
+                mtxt.append(ocrt(fn,img,nu))          # ocr 1
+                mimg.append(fn1)
+                mnum.append(1)
             if int(s)==3:       
                 nu="2"
                 img = prp2.preproc2(imagen)              # preproceso 2
-                mtxt.insert(2,ocrt(fn,imagen,nu))          # ocr 2
-                mnum.insert(2,2)
+                mtxt.append(ocrt(fn,imagen,nu))          # ocr 2
+                mnum.append(2)
             print("mtxt: ",mtxt)
             print("mimg: ",mimg)
             print("mnum: ",mnum)

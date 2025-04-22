@@ -2,10 +2,15 @@
 
 {% block body %}
     <h1>Prueba de Código</h1><hr>
-    <h2>Seleccionar imagen de texto</h2>
-
+ 
     <form action="/uploader" method="POST" enctype="multipart/form-data">
+    {% if fn=="" %}
+        <h2>Seleccionar imagen de texto: </h2>
         <input type="file" name="archivo">
+    {% else %}
+        <h2>Archivo seleccionado: </h2>
+        <div> {{ fn }} </div>
+    {% endif %}
      
     <!--/form>
 
@@ -27,7 +32,12 @@
         <input type="checkbox" name="act" id="chbx_5" value="5">
         <label for="checkbox_JS">Clave-Busqueda</label>
         <br>
-        <p><input type="submit"></p>
+        <p><input type="submit" value="Procesa">
+           {% if fn!="" %}
+           <input type="submit" value="Otra Imagen" name="otra">
+           {% endif %}
+        </p>
+        <p></p>
     </form>
 
     <hr>
