@@ -20,6 +20,8 @@ except ImportError:
     from PIL import Image
 import prep_gvfc_balloon_1 as prp1
 import prep_gvfc_balloon_2 as prp2
+#import prep_balloon_final as prp2
+#import prep_gvfc_balloon_2 as prp2
 
 DEVELOPMENT_ENV = True
 
@@ -29,37 +31,43 @@ app_data = {
     "titulo": "Proceso Algorítmico de Recuperación Eficiente en Gestión Documental Histórica",
     "especial": "Ciencias de la Computacion",
     "name": "Peter's Starter Template for a Flask Web App",
-    "description": "Calcula como difusion del gradiente con vectores de un mapa de borde binario o nivel de grises derivado de imagen",
+    "descripcion": "Proceso documental histórico:",
+    "referencia": "Referencia Bibliográfica:",
+    "presenta": "Presentación:",
     "autor": "Jesus Martin Silva Fernandez",
-    "html_title": "Peter's Starter Template for a Flask Web App",
+    "html_title": "TESIS: Jesus Martin Silva Fernandez",
     "project_name": "TESIS",
     "keywords": "flask, webapp, template, basic",
 }
-
 
 @app.route("/")
 def index():
     return render_template("index.html", app_data=app_data)
 
-
-@app.route("/inicio")
+@app.route("/resumen")
 def about():
-    return render_template("inicio.html", app_data=app_data)
+    return render_template("resumen.html", app_data=app_data)
 
+@app.route("/presenta")
+def presenta():
+    return render_template("presenta.html", app_data=app_data)
 
 @app.route("/documento")
 def service():
     return render_template("jsf_tesis_tx.html", app_data=app_data)
 
-
 @app.route("/codigo")
-def contact():
+def codigo():
     global filename
     return render_template("codigo1.html", app_data=app_data, fn=filename)
 
 @app.route("/recursos")
 def recursos():
     return render_template("jsf_tesis_rec.html", app_data=app_data)
+
+@app.route("/referencia")
+def referencia():
+    return render_template("referencia.html", app_data=app_data)
 
 @app.route("/contacto")
 def contacto():
@@ -90,31 +98,45 @@ def uploader():
         mtxt = []
         mimg = []
         mnum = []
+        n=0
+        ti=[]
         for s in su:
             print(int(s))
-            if int(s)==1:
+            if int(s)==0:
                 nu="0"
-                mtxt.append(ocrt(fn,imagen,nu))          # imagen original, ocr 0
+                mtxt.append(ocrt(fn,imagen,nu))               # imagen original, ocr 0
                 mimg.append(filename1)
-                mnum.append(0)
-            if int(s)==2:       
+                mnum.append(n)
+                ti.append("Imagen Original")
+            if int(s)==1:       
                 nu="1"
-                img,fn1 = prp1.preproc(imagen,fn+nu,ruta)               # imagen de preproceso 1
-                mtxt.append(ocrt(fn,img,nu))          # ocr 1
+                img,fn1 = prp1.preproc(imagen,fn+nu,ruta)      # imagen de preproceso 1
+                mtxt.append(ocrt(fn,img,nu))                   # ocr 1
                 mimg.append(fn1)
-                mnum.append(1)
-            if int(s)==3:       
+                mnum.append(n)
+                ti.append("Imagen Algoritmo 1")
+            if int(s)==2:       
                 nu="2"
-                img = prp2.preproc2(imagen)              # preproceso 2
-                mtxt.append(ocrt(fn,imagen,nu))          # ocr 2
-                mnum.append(2)
+                img,fn2 = prp2.preproc2(imagen,fn+nu,ruta)     # preproceso 2
+                mtxt.append(ocrt(fn,img,nu))                   # ocr 2
+                mimg.append(fn2)
+                mnum.append(n)
+                ti.append("Imagen Algoritmo 2")
+            if int(s)==3:       
+                nu="3"
+                img,fn2 = prp2.preproc2(imagen,fn,nu,ruta)     # preproceso 3
+                mtxt.append(ocrt(fn,img,nu))                   # ocr 3
+                mimg.append(fn2)
+                mnum.append(n)
+                ti.append("Imagen Algoritmo 3")
+            n += 1
             print("mtxt: ",mtxt)
             print("mimg: ",mimg)
             print("mnum: ",mnum)
 #        mens=mult()
 #        graf()
 #    return render_template("codigo2.html", app_data=app_data, filename1=filename1, txt=mtxt)
-    return render_template("codigo2.html", app_data=app_data, fn1=mimg, txt=mtxt,nu=mnum)
+    return render_template("codigo2.html", app_data=app_data, fn1=mimg, txt=mtxt,nu=mnum,ti=ti)
 
 def p_():
     f = request.files['archivo']

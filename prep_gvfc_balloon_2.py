@@ -12,7 +12,7 @@ from scipy.spatial.distance import cdist
 from scipy.ndimage import binary_fill_holes
 from PIL import Image
 
-def calculate_gvf(image, mu, gvf_iterations,height, width, kappa_1 = 0):
+def calculate_gvf(image, mu, gvf_iterations, kappa_1 = 0):
 	fmin = np.min(image)
 	fmax = np.max(image)
 	image_normalized = (image - fmin) / (fmax - fmin)
@@ -28,15 +28,15 @@ def calculate_gvf(image, mu, gvf_iterations,height, width, kappa_1 = 0):
 		u = u + (mu * u_xx) - (norm_square * (u - dx)) + kappa_1 * dx / magnitude
 		v = v + (mu * v_yy) - (norm_square * (v - dy)) + kappa_1 * dy / magnitude
 
-	if os.path.exists('campo_fuerzas_gvf.csv'): os.remove('campo_fuerzas_gvf.csv')
-	with open("campo_fuerzas_gvf.csv", mode="w", newline="") as file:
-		writer = csv.writer(file)
-		writer.writerow(["Fuerzas GVF U"])
-		for i in range(height): writer.writerow([round(u[i, j], 3) for j in range(width)])
-		writer.writerow(["Fuerzas GVF V"])
-		for i in range(height): writer.writerow([round(v[i, j], 3) for j in range(width)])
-		writer.writerow(["Magnitud GVF"])
-		for i in range(height): writer.writerow([round(np.sqrt(u[i, j]**2+ v[i, j]**2), 3) for j in range(width)])
+#	if os.path.exists('campo_fuerzas_gvf.csv'): os.remove('campo_fuerzas_gvf.csv')
+#	with open("campo_fuerzas_gvf.csv", mode="w", newline="") as file:
+#		writer = csv.writer(file)
+#		writer.writerow(["Fuerzas GVF U"])
+#		for i in range(height): writer.writerow([round(u[i, j], 3) for j in range(width)])
+#		writer.writerow(["Fuerzas GVF V"])
+#		for i in range(height): writer.writerow([round(v[i, j], 3) for j in range(width)])
+#		writer.writerow(["Magnitud GVF"])
+#		for i in range(height): writer.writerow([round(np.sqrt(u[i, j]**2+ v[i, j]**2), 3) for j in range(width)])
 	return [u, v]
 
 def apply_dilate(image_matrix, kernel_size=(3,3), iterations=1):
@@ -87,8 +87,8 @@ def process_matrix(u, v, kernel_size_1=(2,2), iterations_1=2, kernel_size_2=(2,2
 
 	return imagen_binaria_result, steps
 
-def preproc2(image):
-# if __name__ == "__main__":
+def preproc2(image,fn,ruta):
+#if __name__ == "__main__":
 	# Cargar la imagen
 #	filename = "car_4.jpg"
 #	filename = "hist_0.jpg"
@@ -108,38 +108,44 @@ def preproc2(image):
 	imagen_binaria = imagen_binaria[::-1]
 
 	#Calculo GVF
-	gvf_u, gvf_v = calculate_gvf(imagen_binaria, mu, gvf_iterations,height,width,kappa_1)
+	gvf_u, gvf_v = calculate_gvf(imagen_binaria, mu, gvf_iterations,kappa_1)
 
 	result_matrix, steps = process_matrix(gvf_u, gvf_v, kernel_size_1=(2,1), iterations_1=1, kernel_size_2=(1,1), iterations_2=1)
 
 	result_matrix = np.bitwise_and(result_matrix,imagen_binaria)
 
-	if os.path.exists('imagen_binaria.csv'): os.remove('imagen_binaria.csv')
-	with open("imagen_binaria.csv", mode="w", newline="") as file:
-		writer = csv.writer(file)
-		for i in range(height): writer.writerow([round(imagen_binaria[i, j], 3) for j in range(width)])
+#	if os.path.exists('imagen_binaria.csv'): os.remove('imagen_binaria.csv')
+#	with open("imagen_binaria.csv", mode="w", newline="") as file:
+#		writer = csv.writer(file)
+#		for i in range(height): writer.writerow([round(imagen_binaria[i, j], 3) for j in range(width)])
 
 	# Mostrar la imagen original y el resultado del GVF
 	nu=50
-	fig = plt.figure(figsize=(15, 50))
-	fig.canvas.manager.set_window_title(os.path.basename(__file__))
-	plt.subplot(221)
-	plt.imshow(image[::-1], cmap="gray")       # 1
-	plt.axis([-nu, width+nu, -nu, height+nu])
-	plt.title("Imagen Original 1")
-
+	fig = plt.figure(figsize=(10, 5))
+#	fig.canvas.manager.set_window_title("TESIS")
+#	plt.subplot(221)
+#	plt.imshow(image[::-1], cmap="gray")       # 1
+#	plt.axis([-nu, width+nu, -nu, height+nu])
+#	plt.title("Imagen Original 1")
 #	plt.subplot(222)
 #	plt.imshow(steps[2], cmap="gray")          # 2
 #	plt.axis([-nu, width+nu, -nu, height+nu])
 #	plt.title("Magnitud GVF 2")
 #	plt.subplot(223)
-#	plt.imshow(imagen_binaria, cmap="gray")    # 3
-#	plt.axis([-nu, width+nu, -nu, height+nu])
+	plt.imshow(imagen_binaria, cmap="gray")    # 3
+	plt.axis([-nu, width+nu, -nu, height+nu])
+	plt.gca().set_axis_off()
+	fn1=os.path.join(ruta,fn+".jpg")
+	plt.savefig(fn1, dpi=100, bbox_inches='tight', pad_inches=0)
+	plt.close()
+#    fn1=os.path.join("static","hist_02.jpg")
+#    plt.gca().set_axis_off()
+
 #	plt.title("Imagen Binaria 3")
 #	plt.subplot(224)
 #	plt.imshow(result_matrix, cmap="gray")     # 4
 #	plt.axis([-nu, width+nu, -nu, height+nu])
 #	plt.title("GVF final 4")
-	plt.savefig('testplot.png')
-	plt.show()
-	return Image.open('testplot.png')
+
+#	plt.show()
+	return Image.open(fn1),fn1

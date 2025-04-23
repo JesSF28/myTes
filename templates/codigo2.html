@@ -4,11 +4,12 @@
     {% set languages = ["HTML", "CSS", "Javascript", "Python", "Ruby", "PHP", "Java"] %}
 
     <form action="/codigo" enctype="multipart/form-data">
-        <h1>RESULTADOS: </h1>;
+        <h1>RESULTADOS: </h1>
         <ul>
             {% for n in nu %}
             <hr />
-    <div class="container">
+            <p>{{ ti[n] }}</p>
+        <div class="container">
         <figure>
             <figcaption style="text-align: center;"><code>Imagen</code></figcaption>
             <img src="{{ fn1[nu[n]] }}" alt="Imagen" class="image" alt="IMAGEN 1">
@@ -21,12 +22,12 @@
             <figcaption style="text-align: center;"><code>% Reconocimiento</code></figcaption>
             <div class="text"> {{ nu[n] }}</div>
         </figure>
-    </div>
+        </div>
 
             {%  endfor %}
         <hr />
         </ul>
     <!--a href="templates/codigo1.html">Regresar</a-->
-    <p><input type="submit" value="Otra prueba"></p>
+        <p><input type="submit" value="Otra prueba"></p>
     </form>
 {% endblock %}
