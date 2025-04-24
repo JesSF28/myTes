@@ -124,7 +124,7 @@ def uploader():
                 ti.append("Imagen Algoritmo 2")
             if int(s)==3:       
                 nu="3"
-                img,fn2 = prp2.preproc2(imagen,fn,nu,ruta)     # preproceso 3
+                img,fn2 = prp2.preproc3(imagen,fn+nu,ruta)     # preproceso 3
                 mtxt.append(ocrt(fn,img,nu))                   # ocr 3
                 mimg.append(fn2)
                 mnum.append(n)
