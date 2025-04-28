@@ -14,18 +14,24 @@
             <figcaption style="text-align: center;"><code>Imagen</code></figcaption>
             <img src="{{ fn1[nu[n]] }}" alt="Imagen" class="image" alt="IMAGEN 1">
         </figure>
+        {% if "3" in su2 %}
         <figure>
             <figcaption style="text-align: center;"><code>Texto de OCR</code></figcaption>
             <div class="text" >{{ txt[nu[n]] }}</div>
         </figure>
+        {% endif %}
+        {% if "4" in su2 %}
         <figure>
             <figcaption style="text-align: center;"><code>Texto Corregido</code></figcaption>
             <div class="text"> {{ tcorr[n] }}</div>
         </figure>
+        {% endif %}
+        {% if "5" in su2 %}
         <figure>
             <figcaption style="text-align: center;"><code>Palabras Clave</code></figcaption>
             <div class="text"> {{ plbc[n] }}</div>
         </figure>
+        {% endif %}
         </div>
 
             {%  endfor %}
