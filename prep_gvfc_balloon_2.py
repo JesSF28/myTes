@@ -1,3 +1,4 @@
+# TESIS: Doctorado Jesús Martín Silva Fernández
 import os
 import csv
 import cv2
@@ -87,77 +88,8 @@ def process_matrix(u, v, kernel_size_1=(2,2), iterations_1=2, kernel_size_2=(2,2
 
 	return imagen_binaria_result, steps
 
-def preproc2(image,fn,ruta):
-#if __name__ == "__main__":
-	# Cargar la imagen
-#	filename = "car_4.jpg"
-#	filename = "hist_0.jpg"
-#	image = cv2.imread(os.path.join("assets", filename), cv2.IMREAD_GRAYSCALE)
-	# image = gaussian_filter(image, sigma=1)
-	height, width = image.shape
-
-	# Variables GVF-Snake
-	mu = 0.2                # Mu - densidad GVF
-	gvf_iterations = 1      # Iteraciones para suavizar GVF
-	kappa_1 = 0             # Coeficiente Balloon
-	snake_iterations = 200  # Iteraciones para adaptar snake
-	
-	#Funcion Binaria
-	_, binaria_otsu = cv2.threshold(image, 100, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-	imagen_binaria = (binaria_otsu // 255).astype(np.uint8)
-	imagen_binaria = imagen_binaria[::-1]
-
-	#Calculo GVF
-	gvf_u, gvf_v = calculate_gvf(imagen_binaria, mu, gvf_iterations,kappa_1)
-
-	result_matrix, steps = process_matrix(gvf_u, gvf_v, kernel_size_1=(2,1), iterations_1=1, kernel_size_2=(1,1), iterations_2=1)
-
-	result_matrix = np.bitwise_and(result_matrix,imagen_binaria)
-
-#	if os.path.exists('imagen_binaria.csv'): os.remove('imagen_binaria.csv')
-#	with open("imagen_binaria.csv", mode="w", newline="") as file:
-#		writer = csv.writer(file)
-#		for i in range(height): writer.writerow([round(imagen_binaria[i, j], 3) for j in range(width)])
-
-	# Mostrar la imagen original y el resultado del GVF
-	nu=50
-	fig = plt.figure(figsize=(10, 5))
-#	fig.canvas.manager.set_window_title("TESIS")
-#	plt.subplot(221)
-#	plt.imshow(image[::-1], cmap="gray")       # 1
-#	plt.axis([-nu, width+nu, -nu, height+nu])
-#	plt.title("Imagen Original 1")
-#	plt.subplot(222)
-#	plt.imshow(steps[2], cmap="gray")          # 2
-#	plt.axis([-nu, width+nu, -nu, height+nu])
-#	plt.title("Magnitud GVF 2")
-#	plt.subplot(223)
-
-	plt.imshow(imagen_binaria, cmap="gray")    # 3
-	plt.axis([-nu, width+nu, -nu, height+nu])
-#    plt.gca().set_axis_off()
-#    fn1=os.path.join(ruta,fn+".jpg")
-#    plt.savefig(fn1, dpi=100, bbox_inches='tight', pad_inches=0)
-#    plt.close()
-#    fn1=os.path.join("static","hist_02.jpg")
-#    plt.gca().set_axis_off()
-
-#	plt.title("Imagen Binaria 3")
-#	plt.subplot(224)
-#	plt.imshow(result_matrix, cmap="gray")     # 4
-#	plt.axis([-nu, width+nu, -nu, height+nu])
-#	plt.title("GVF final 4")
-
-#	plt.show()
-#    return Image.open(fn1),fn1
-
-def preproc3(image,fn,n,ruta):
+def preproc2(image,fn,n,ruta):
 	fn=fn+n
-#if __name__ == "__main__":
-	# Cargar la imagen
-#	filename = "car_4.jpg"
-#	filename = "hist_0.jpg"
-#	image = cv2.imread(os.path.join("assets", filename), cv2.IMREAD_GRAYSCALE)
 	# image = gaussian_filter(image, sigma=1)
 	height, width = image.shape
 
@@ -211,16 +143,10 @@ def preproc3(image,fn,n,ruta):
 	else:
 		img=plt.imshow(result_matrix, cmap="gray")     # 4
 
-#	img_r = np.rot90(img, k=2, axes={0,1})
-#	plt.imshow(img_r)
-#	plt.axis([-nu, width+nu, -nu, height+nu])
 	plt.axis([-nu, width, -nu, height])
 	plt.gca().set_axis_off()
 	fn1=os.path.join(ruta,fn+".jpg")
 	plt.savefig(fn1, dpi=100, bbox_inches='tight', pad_inches=0)
 	plt.close()
 
-#	plt.title("GVF final 4")
-
-#	plt.show()
 	return Image.open(fn1),fn1

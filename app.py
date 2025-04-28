@@ -1,3 +1,4 @@
+# TESIS: Doctorado Jesús Martín Silva Fernández
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -125,7 +126,7 @@ def uploader():
                 ti.append("Imagen Algoritmo 1")
             if int(s)==2:       
                 nu="2"
-                img,fn2 = prp2.preproc3(imagen,fn,nu,ruta)     
+                img,fn2 = prp2.preproc2(imagen,fn,nu,ruta)     
                 mimg.append(fn2)                               # preproceso 2
                 mtxt.append(ocrt(fn,img,nu))                   # ocr 2
                 mpst.append(postp1.palabr(ruta,fn+nu))         # Txt corregido 2
@@ -133,7 +134,7 @@ def uploader():
                 ti.append("Imagen Algoritmo 2")
             if int(s)==3:       
                 nu="3"
-                img,fn2 = prp2.preproc3(imagen,fn,nu,ruta)     # preproceso 3
+                img,fn2 = prp2.preproc2(imagen,fn,nu,ruta)     # preproceso 3
                 mimg.append(fn2)
                 mtxt.append(ocrt(fn,img,nu))                   # ocr 3
                 mpst.append(postp1.palabr(ruta,fn+nu))         # Txt corregido 3
