@@ -72,8 +72,8 @@ def palabr(ruta,fn):
 #fn="hist_02"
     fn1=os.path.join(ruta, fn+".txt")
     fn2=os.path.join(ruta, fn+"1.txt")
-    arch_1 = open(fn1,"r")
-    arch_2 = open(fn2,"w")
+    arch_1 = open(fn1,"r", encoding="utf-8")
+    arch_2 = open(fn2,"w", encoding="utf-8")
 
 #with open(fn1, "r") as archivo:
     with arch_1 as archivo:
