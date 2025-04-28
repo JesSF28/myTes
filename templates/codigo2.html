@@ -4,7 +4,7 @@
     {% set languages = ["HTML", "CSS", "Javascript", "Python", "Ruby", "PHP", "Java"] %}
 
     <form action="/codigo" enctype="multipart/form-data">
-        <h1>RESULTADOS: </h1>
+        <h1>RESULTADOS DE PRUEBA: {{pr}} </h1>
         <ul>
             {% for n in nu %}
             <hr />
@@ -15,12 +15,12 @@
             <img src="{{ fn1[nu[n]] }}" alt="Imagen" class="image" alt="IMAGEN 1">
         </figure>
         <figure>
-            <figcaption style="text-align: center;"><code>Texto</code></figcaption>
+            <figcaption style="text-align: center;"><code>Texto de OCR</code></figcaption>
             <div class="text" >{{ txt[nu[n]] }}</div>
         </figure>
         <figure>
-            <figcaption style="text-align: center;"><code>% Reconocimiento</code></figcaption>
-            <div class="text"> {{ nu[n] }}</div>
+            <figcaption style="text-align: center;"><code>Texto Corregido</code></figcaption>
+            <div class="text"> {{ tcorr[n] }}</div>
         </figure>
         </div>
 

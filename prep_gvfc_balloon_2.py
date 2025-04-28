@@ -132,12 +132,13 @@ def preproc2(image,fn,ruta):
 #	plt.axis([-nu, width+nu, -nu, height+nu])
 #	plt.title("Magnitud GVF 2")
 #	plt.subplot(223)
+
 	plt.imshow(imagen_binaria, cmap="gray")    # 3
 	plt.axis([-nu, width+nu, -nu, height+nu])
-	plt.gca().set_axis_off()
-	fn1=os.path.join(ruta,fn+".jpg")
-	plt.savefig(fn1, dpi=100, bbox_inches='tight', pad_inches=0)
-	plt.close()
+#    plt.gca().set_axis_off()
+#    fn1=os.path.join(ruta,fn+".jpg")
+#    plt.savefig(fn1, dpi=100, bbox_inches='tight', pad_inches=0)
+#    plt.close()
 #    fn1=os.path.join("static","hist_02.jpg")
 #    plt.gca().set_axis_off()
 
@@ -148,9 +149,10 @@ def preproc2(image,fn,ruta):
 #	plt.title("GVF final 4")
 
 #	plt.show()
-	return Image.open(fn1),fn1
+#    return Image.open(fn1),fn1
 
-def preproc3(image,fn,ruta):
+def preproc3(image,fn,n,ruta):
+	fn=fn+n
 #if __name__ == "__main__":
 	# Cargar la imagen
 #	filename = "car_4.jpg"
@@ -183,8 +185,9 @@ def preproc3(image,fn,ruta):
 #		for i in range(height): writer.writerow([round(imagen_binaria[i, j], 3) for j in range(width)])
 
 	# Mostrar la imagen original y el resultado del GVF
-	nu=50
-	fig = plt.figure(figsize=(10, 5))
+	nu=0
+#	fig = plt.figure(figsize=(10, 5))
+	plt.figure(figsize=(10, 5))
 #	fig.canvas.manager.set_window_title("TESIS")
 #	plt.subplot(221)
 #	plt.imshow(image[::-1], cmap="gray")       # 1
@@ -203,8 +206,15 @@ def preproc3(image,fn,ruta):
 
 #	plt.title("Imagen Binaria 3")
 #	plt.subplot(224)
-	plt.imshow(result_matrix, cmap="gray")     # 4
-	plt.axis([-nu, width+nu, -nu, height+nu])
+	if n=="2":
+		img=plt.imshow(imagen_binaria, cmap="gray")    # 3
+	else:
+		img=plt.imshow(result_matrix, cmap="gray")     # 4
+
+#	img_r = np.rot90(img, k=2, axes={0,1})
+#	plt.imshow(img_r)
+#	plt.axis([-nu, width+nu, -nu, height+nu])
+	plt.axis([-nu, width, -nu, height])
 	plt.gca().set_axis_off()
 	fn1=os.path.join(ruta,fn+".jpg")
 	plt.savefig(fn1, dpi=100, bbox_inches='tight', pad_inches=0)

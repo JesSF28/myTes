@@ -52,37 +52,40 @@ def corregir(palabra):
     return max(correcciones(palabra), key=probabilidad)
 
 # Ejemplo de uso
-texto_1 = ['La siscripcion es de',
-    'un peso mesual, y un',
-    'real el llúmero suelto:',
-    'para iino y otro ocur-',
-    'rase, si se cjuiere, a la',
-    'Imprenta y Litiigrafia',
-    'de sii redacción, calle',
-    'de Plateros No 216']
+#texto_1 = ['La siscripcion es de',
+#    'un peso mesual, y un',
+#    'real el llúmero suelto:',
+#    'para iino y otro ocur-',
+#    'rase, si se cjuiere, a la',
+#    'Imprenta y Litiigrafia',
+#    'de sii redacción, calle',
+#    'de Plateros No 216']
 #for palabras_t in texto_1:
 #    print(f'Origen   : {palabras_t}')
 #    palabras_texto = palabras_t.split()
 #    texto_corregido = ' '.join(corregir(palabra) for palabra in palabras_texto)
 #    print(f'Corregido: {texto_corregido}')
 
-ruta="static"
-fn="hist_02"
-fn1=os.path.join(ruta, fn+".txt")
-fn2=os.path.join(ruta, fn+"1.txt")
-arch_1 = open(fn1,"r")
-arch_2 = open(fn2,"w")
+def palabr(ruta,fn):
+#ruta="static"
+#fn="hist_02"
+    fn1=os.path.join(ruta, fn+".txt")
+    fn2=os.path.join(ruta, fn+"1.txt")
+    arch_1 = open(fn1,"r")
+    arch_2 = open(fn2,"w")
 
 #with open(fn1, "r") as archivo:
-with arch_1 as archivo:
-    contenido = archivo.read()
-    print(contenido)
-    palabras_t = contenido.split()
-    t_corregido = ' '.join(corregir(palabra) for palabra in palabras_t)
-    print(f'Corregido: {t_corregido}')
-    arch_2.write(t_corregido)
-arch_1.close()
-arch_2.close()
+    with arch_1 as archivo:
+        contenido = archivo.read()
+#        print(contenido)
+        palabras_t = contenido.split()
+        t_corregido = ' '.join(corregir(palabra) for palabra in palabras_t)
+#        print(f'Corregido: {t_corregido}')
+        arch_2.write(t_corregido)
+    arch_1.close()
+    arch_2.close()
+
+    return t_corregido
 
 #texto_incompleto = "Esto es un ejmpl de palabas correidas por algorimo."
 #texto_incompleto = "Ejmplo de txto con plabas incmpletas y mal escritas."

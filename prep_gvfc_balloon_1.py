@@ -1,5 +1,7 @@
 import os
 
+import matplotlib
+matplotlib.use('agg')
 import cv2
 import csv
 import numpy as np
@@ -196,8 +198,9 @@ def preproc(image,fn,ruta):
 	#		})
 
 	# Mostrar la imagen original y el resultado del GVF
-    fig = plt.figure(figsize=(10, 5))
-    fig.canvas.manager.set_window_title('TESIS')
+#    fig = plt.figure(figsize=(10, 5))
+    plt.figure(figsize=(10, 5))
+#    fig.canvas.manager.set_window_title('TESIS')
 
 #    plt.subplot(131)
 #    plt.quiver(test_u[::-1],-test_v[::-1], angles="xy")
@@ -207,12 +210,14 @@ def preproc(image,fn,ruta):
 
 #    plt.subplot(132)
 #    plt.imshow(np.sqrt(u**2 + v**2), cmap="gray")
-    img2 = plt.imshow(np.sqrt(u**2 + v**2), cmap="gray_r")
+#    img2 = plt.imshow(np.sqrt(u**2 + v**2), cmap="gray_r")
+    plt.imshow(np.sqrt(u**2 + v**2), cmap="gray_r")
 #    plt.savefig('testplot.png')
     fn1=os.path.join(ruta, fn+".jpg")
 #    plt.figure(figsize=(2, 1))
     plt.gca().set_axis_off()
     plt.savefig(fn1, dpi=100, bbox_inches='tight')
+    plt.close()
 
 #    img2
 #    plt.title("Resultado 2: Magnitud Campo GVF")

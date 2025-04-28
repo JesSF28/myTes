@@ -6,6 +6,7 @@ UNSA-FIPS-DCC, 2025
 JMSF
 """
 filename=""
+pr=0
 from flask import Flask, render_template, request
 
 import os
@@ -20,6 +21,7 @@ except ImportError:
     from PIL import Image
 import prep_gvfc_balloon_1 as prp1
 import prep_gvfc_balloon_2 as prp2
+import post_pnorv_1 as postp1
 #import prep_balloon_final as prp2
 #import prep_gvfc_balloon_2 as prp2
 
@@ -75,7 +77,7 @@ def contacto():
 
 @app.route("/uploader", methods=['POST'])
 def uploader():
-    global filename
+    global filename,pr
     if request.method == "POST":
         oimg = request.form.get('otra')
         if oimg=='Otra Imagen':
@@ -86,6 +88,9 @@ def uploader():
             f = request.files['archivo']
 #        f = request.FILES['ufile'].file.name
             filename = secure_filename(f.filename)       # Nom Arch
+            if filename=="":
+               return render_template("codigo1.html", app_data=app_data, fn=filename)
+                
         filename1 = os.path.join(ruta, filename)         # Ruta+nom Arch
         fn,ex = os.path.splitext(filename)               # Nom Arch, Ext
         print("filename: ",filename)
@@ -98,45 +103,53 @@ def uploader():
         mtxt = []
         mimg = []
         mnum = []
+        mpst = []
         n=0
         ti=[]
         for s in su:
             print(int(s))
             if int(s)==0:
                 nu="0"
-                mtxt.append(ocrt(fn,imagen,nu))               # imagen original, ocr 0
-                mimg.append(filename1)
-                mnum.append(n)
-                ti.append("Imagen Original")
+                mimg.append(filename1)                        # Nomb imagen original
+                mtxt.append(ocrt(fn,imagen,nu))               # Agrega texto de ocr 0
+                mpst.append(postp1.palabr(ruta,fn+nu))        # Agrega texto corregido
+                mnum.append(n)                                # Agrega Num opcion
+                ti.append("Imagen Original")                  # Agrega titulo Imagen
             if int(s)==1:       
                 nu="1"
-                img,fn1 = prp1.preproc(imagen,fn+nu,ruta)      # imagen de preproceso 1
+                img,fn1 = prp1.preproc(imagen,fn+nu,ruta)      
+                mimg.append(fn1)                               # preproceso 1
                 mtxt.append(ocrt(fn,img,nu))                   # ocr 1
-                mimg.append(fn1)
+                mpst.append(postp1.palabr(ruta,fn+nu))         # Txt corregido 1
                 mnum.append(n)
                 ti.append("Imagen Algoritmo 1")
             if int(s)==2:       
                 nu="2"
-                img,fn2 = prp2.preproc2(imagen,fn+nu,ruta)     # preproceso 2
+                img,fn2 = prp2.preproc3(imagen,fn,nu,ruta)     
+                mimg.append(fn2)                               # preproceso 2
                 mtxt.append(ocrt(fn,img,nu))                   # ocr 2
-                mimg.append(fn2)
+                mpst.append(postp1.palabr(ruta,fn+nu))         # Txt corregido 2
                 mnum.append(n)
                 ti.append("Imagen Algoritmo 2")
             if int(s)==3:       
                 nu="3"
-                img,fn2 = prp2.preproc3(imagen,fn+nu,ruta)     # preproceso 3
-                mtxt.append(ocrt(fn,img,nu))                   # ocr 3
+                img,fn2 = prp2.preproc3(imagen,fn,nu,ruta)     # preproceso 3
                 mimg.append(fn2)
+                mtxt.append(ocrt(fn,img,nu))                   # ocr 3
+                mpst.append(postp1.palabr(ruta,fn+nu))         # Txt corregido 3
                 mnum.append(n)
                 ti.append("Imagen Algoritmo 3")
             n += 1
             print("mtxt: ",mtxt)
             print("mimg: ",mimg)
             print("mnum: ",mnum)
+            print("mpst: ",mpst)
+    pr+=1    
+    print("prueba: ",pr)
 #        mens=mult()
 #        graf()
 #    return render_template("codigo2.html", app_data=app_data, filename1=filename1, txt=mtxt)
-    return render_template("codigo2.html", app_data=app_data, fn1=mimg, txt=mtxt,nu=mnum,ti=ti)
+    return render_template("codigo2.html", app_data=app_data, fn1=mimg, txt=mtxt,tcorr=mpst,nu=mnum,ti=ti,pr=pr)
 
 def p_():
     f = request.files['archivo']
