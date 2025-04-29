@@ -34,7 +34,7 @@ app_data = {
     "especial": "Ciencias de la Computacion",
     "name": "Peter's Starter Template for a Flask Web App",
     "descripcion": "Proceso documental histórico:",
-    "referencia": "Referencia Bibliográfica:",
+    "referencia": "Referencia Bibliográfica de Tesis:",
     "presenta": "Presentación:",
     "autor": "Jesus Martin Silva Fernandez",
     "html_title": "TESIS: Jesus Martin Silva Fernandez",
@@ -56,7 +56,7 @@ def presenta():
 
 @app.route("/documento")
 def service():
-    return render_template("jsf_tesis_tx.html", app_data=app_data)
+    return render_template("jsf_tesis_tx_.html", app_data=app_data)
 
 @app.route("/codigo")
 def codigo():
@@ -166,8 +166,7 @@ def uploader():
 
 def ocrt(fn,img,nu):
     pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
-    txt = pytesseract.image_to_string(img)          # Genera texto
-#    n,e = os.path.splitext(fn)                      # separa nombre arch
+    txt = pytesseract.image_to_string(img)                                    # Genera texto
     tx = open (os.path.join('static',fn+nu+".txt"),'w', encoding="utf-8")
     tx.write(txt)
     tx.close()
