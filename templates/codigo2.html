@@ -5,6 +5,10 @@
 
     <form action="/codigo" enctype="multipart/form-data">
         <h1>RESULTADOS DE PRUEBA: {{pr}} </h1>
+
+        <div class="container-fluid row">
+            <div id="detalleseleccion" name="detalleseleccion" class="este">
+
         <ul>
             {% for n in nu %}
             <hr />
@@ -37,7 +41,15 @@
             {%  endfor %}
         <hr />
         </ul>
+    
+        </div>
+    </div>
+
     <!--a href="templates/codigo1.html">Regresar</a-->
         <p><input type="submit" value="Otra prueba"></p>
+        <figure>
+            <figcaption style="text-align: center;"><code>Estadística</code></figcaption>
+            <img src="{{ fng }}" alt="Imagen" class="image" alt="IMAGEN 1">
+        </figure>
     </form>
 {% endblock %}

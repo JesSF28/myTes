@@ -20,10 +20,11 @@ try:
     import Image
 except ImportError:
     from PIL import Image
-import prep_gvfc_balloon_1 as prp1
-import prep_gvfc_balloon_2 as prp2
-import post_pnorv_1 as postp1
-import palabr_clave as palc
+import prep_gvfc_balloon_1 as prp1       # Algoritmo Preproceso 1
+import prep_gvfc_balloon_2 as prp2       # Algoritmo Preproceso 2
+import post_pnorv_1 as postp1            # Algoritmo Postproceso
+import palabr_clave as palc              # Algoritmo Palabras clave
+import estadistica as est                # Conteo estadistica
 
 DEVELOPMENT_ENV = True
 
@@ -35,6 +36,7 @@ app_data = {
     "name": "Peter's Starter Template for a Flask Web App",
     "descripcion": "Proceso documental histórico:",
     "referencia": "Referencia Bibliográfica de Tesis:",
+    "recursos": "Recursos utilizados en Tesis:",
     "presenta": "Presentación:",
     "autor": "Jesus Martin Silva Fernandez",
     "html_title": "TESIS: Jesus Martin Silva Fernandez",
@@ -65,7 +67,7 @@ def codigo():
 
 @app.route("/recursos")
 def recursos():
-    return render_template("jsf_tesis_rec.html", app_data=app_data)
+    return render_template("recursos.html", app_data=app_data)
 
 @app.route("/referencia")
 def referencia():
@@ -106,6 +108,11 @@ def uploader():
         mnum = []
         mpst = []
         mkyw = []
+
+        mtp=[]
+        mtc=[]
+        mp= []
+        mn= []
         n=0
         ti=[]
         for s in su:
@@ -120,38 +127,68 @@ def uploader():
                     mkyw.append(kyw)                                  # Agrega palabras clave
                 mnum.append(n)                                        # Agrega Num opcion
                 ti.append("Imagen Original")                          # Agrega titulo Imagen
-            if int(s)==1:       
+            if int(s)==1:                                             # Alg 1 - Prepr       
                 nu="1"
                 img,fn1 = prp1.preproc(imagen,fn+nu,ruta)      
                 mimg.append(fn1)                                      # preproceso 1
-                if "3" in su2: mtxt.append(ocrt(fn,img,nu))           # ocr 1
-                if "4" in su2: mpst.append(postp1.palabr(ruta,fn+nu)) # Txt corregido 1
+                tx1=""
+                if "3" in su2: 
+                    tx1=ocrt(fn,img,nu)                               # ocr 1
+                    mtxt.append(tx1)           
+                if "4" in su2: 
+                    tx2=postp1.palabr(ruta,fn+nu)
+                    mpst.append(tx2)                                  # Txt corregido 1
+                    tp,tc,p=est.gen_estad(tx1, tx2)                   # Estadística
+                    mtp.append(tp)
+                    mtc.append(tc)
+                    mp.append(p)
                 if "5" in su2: 
                     kyw,akyw,yr,se,re=palc.palabr_c(ruta,fn+nu,3) 
                     mkyw.append(kyw)                                  # Agrega palabras clave
                 mnum.append(n)
+                mn.append(nu)
                 ti.append("Imagen Algoritmo 1")
-            if int(s)==2:       
+            if int(s)==2:                                             # Alg 2 - Prepr
                 nu="2"
                 img,fn2 = prp2.preproc2(imagen,fn,nu,ruta)     
-                mimg.append(fn2)                                      # preproceso 2
-                if "3" in su2: mtxt.append(ocrt(fn,img,nu))           # ocr 2
-                if "4" in su2: mpst.append(postp1.palabr(ruta,fn+nu)) # Txt corregido 2
+                mimg.append(fn2)
+                tx1=""                                      
+                if "3" in su2:
+                    tx1=ocrt(fn,img,nu)                               # ocr 2
+                    mtxt.append(tx1)           
+                if "4" in su2:
+                    tx2=postp1.palabr(ruta,fn+nu)                     # postpoceso
+                    mpst.append(tx2)                                  # Txt corregido 2
+                    tp,tc,p=est.gen_estad(tx1, tx2)                   # Estadística
+                    mtp.append(tp)
+                    mtc.append(tc)
+                    mp.append(p)
                 if "5" in su2: 
                     kyw,akyw,yr,se,re=palc.palabr_c(ruta,fn+nu,3) 
                     mkyw.append(kyw)                                  # Agrega palabras clave
                 mnum.append(n)
+                mn.append(nu)
                 ti.append("Imagen Algoritmo 2")
-            if int(s)==3:       
+            if int(s)==3:                                             # Alg 3 - Prepr
                 nu="3"
                 img,fn2 = prp2.preproc2(imagen,fn,nu,ruta)            # preproceso 3
                 mimg.append(fn2)
-                if "3" in su2: mtxt.append(ocrt(fn,img,nu))           # ocr 3
-                if "4" in su2: mpst.append(postp1.palabr(ruta,fn+nu)) # Txt corregido 3
+                tx1=""
+                if "3" in su2: 
+                    tx1=ocrt(fn,img,nu)                               # ocr 3
+                    mtxt.append(tx1)           
+                if "4" in su2: 
+                    tx2=postp1.palabr(ruta,fn+nu)                     # Txt corregido 3
+                    mpst.append(tx2)                                  
+                    tp,tc,p=est.gen_estad(tx1, tx2)                   # Estadística
+                    mtp.append(tp)
+                    mtc.append(tc)
+                    mp.append(p)
                 if "5" in su2: 
                     kyw,akyw,yr,se,re=palc.palabr_c(ruta,fn+nu,3) 
                     mkyw.append(kyw)                                  # Agrega palabras clave
                 mnum.append(n)
+                mn.append(nu)
                 ti.append("Imagen Algoritmo 3")
             n += 1
             print("mtxt: ",mtxt)
@@ -159,10 +196,12 @@ def uploader():
             print("mnum: ",mnum)
             print("mpst: ",mpst)
             print("mkyw: ",mkyw)
+            print("% corr: ",mp)
+            print("Alg Nu: ",mn)
     pr+=1    
     print("prueba: ",pr)
-
-    return render_template("codigo2.html", app_data=app_data, fn1=mimg, txt=mtxt,tcorr=mpst,plbc=mkyw,nu=mnum,ti=ti,pr=pr,su2=su2)
+    fng=est.est_graf(mn, mp,fn,ruta)
+    return render_template("codigo2.html", app_data=app_data, fn1=mimg, txt=mtxt,tcorr=mpst,plbc=mkyw,nu=mnum,ti=ti,pr=pr,su2=su2,fng=fng)
 
 def ocrt(fn,img,nu):
     pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"

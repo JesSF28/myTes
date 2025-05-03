@@ -1,9 +1,196 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-    <h1>{{ app_data['description'] }}</h1>
-    <h2>Services page</h2>
-    <p class="lead">Use this document as a way to quickly start any new project.
-        <br> All you get is this text and a mostly barebones HTML document.</p>
-    <div> Now updated to Bootstrap (Version 5.3.0) and jQuery 3.6.3</div>
+    <h1>{{ app_data['recursos'] }}</h1>
+    <div class="col-12 align-self-start">
+      <p>Base de Datos, Librerías, Plantillas</p>
+    </div>
+
+    <div class="container-fluid row">
+      <div id="detalleseleccion" name="detalleseleccion" class="este">
+
+    <TABLE border="1" cellpadding="5" cellspacing="2"
+    summary="Recursos utiles para sistema de Tesis">
+    <TR>
+      <TH scope="col" abbr="Num">Num</TH>
+      <TH scope="col" abbr="Autor">Descripción Recurso</TH>
+      <TH scope="col">Otros</TH>
+    </TR>
+    <TR>
+        <TD scope="row">01</TD>
+        <TD>
+          <a href="https://www.youtube.com/watch?v=7cpHRVqzS6o">
+            Plantilla word <EM></EM>
+          </a>
+        </TD>
+        <TD>Plantilla</TD>
+    </TR>
+
+    <TR>
+      <TD scope="row">02</TD>
+      <TD>
+        <a href="https://www.nist.gov/srd/nist-special-database-19">
+          NIST Special Database 19 <EM></EM>
+        </a>
+      </TD>
+      <TD>Base Datos</TD>
+    </TR>
+
+    <TR>
+      <TD scope="row">03</TD>
+      <TD>
+        <a href="https://www.nist.gov/itl/iad/image-group/nist-special-database-302">
+          NIST Special Database 302<EM></EM>
+        </a>
+      </TD>
+      <TD>Base Datos</TD>
+    </TR>
+
+    <TR>
+      <TD scope="row">04</TD>
+      <TD>
+        <a href="https://www.concordia.ca/research/cenparmi/about.html">
+          CENPARMI<EM></EM>
+        </a>
+      </TD>
+      <TD>Base Datos</TD>
+    </TR>
+
+    <TR>
+      <TD scope="row">05</TD>
+      <TD>
+        <a href="http://tess4j.sourceforge.net/">
+          Tess4J<EM></EM>
+        </a>
+      </TD>
+      <TD>Servicio</TD>
+    </TR>    
+
+    <TR>
+      <TD scope="row">06</TD>
+      <TD>
+        <a href="https://hal.archives-ouvertes.fr/hal-00867225">
+          Endeavour MerKator,software for cross-species gene prioritization<EM></EM>
+        </a>
+      </TD>
+      <TD>Base Datos</TD>
+    </TR>    
+
+    <TR>
+      <TD scope="row">07</TD>
+      <TD>
+        <a href="https://www.cs.waikato.ac.nz/ml/weka/">
+          Weka 3.0<EM></EM>
+        </a>
+      </TD>
+      <TD>Libreria</TD>
+    </TR>    
+
+    <TR>
+      <TD scope="row">08</TD>
+      <TD>
+        <a href="https://github.com/yannrichet/jmathplot">
+          Librería JMathPlot<EM></EM>
+        </a>
+      </TD>
+      <TD>Libreria</TD>
+    </TR>    
+
+    <TR>
+      <TD scope="row">09</TD>
+      <TD>
+        <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.imshow.html">
+          Librería Imshow<EM></EM>
+        </a>
+      </TD>
+      <TD>Libreria</TD>
+    </TR>    
+
+    <TR>
+      <TD scope="row">10</TD>
+      <TD>
+        <a href="Tess2Speech/tess2Speech/src/main/java/anteraaron/tess2speech/Fragment\_ConvertedText.java">
+          Tess2Speech: An Intelligent Character<EM></EM>
+        </a>
+      </TD>
+      <TD>Servicio</TD>
+    </TR>    
+
+    <TR>
+      <TD scope="row">11</TD>
+      <TD>
+        <a href="https://paperswithcode.com/dataset/rimes">
+          RIMES database<EM></EM>
+        </a>
+      </TD>
+      <TD>Base Datos</TD>
+    </TR>    
+
+    <TR>
+      <TD scope="row">12</TD>
+      <TD>
+        <a href="https://apps.apple.com/us/app/handyspeech/id563600464">
+          Handwriting to Speech App<EM></EM>
+        </a>
+      </TD>
+      <TD>Servicio</TD>
+    </TR>    
+
+    <TR>
+      <TD scope="row">13</TD>
+      <TD>
+        <a href="https://github.com/mhraza95/Digit-Recognition-LeNet">
+          LeNet<EM></EM>
+        </a>
+      </TD>
+      <TD>Libreria</TD>
+    </TR>    
+  
+    <TR>
+      <TD scope="row">14</TD>
+      <TD>
+        <a href="https://ieeexplore.ieee.org/document/129422">
+          ANNA neural net chip<EM></EM>
+        </a>
+      </TD>
+      <TD>Libreria</TD>
+    </TR>    
+  
+    <TR>
+      <TD scope="row">15</TD>
+      <TD>
+        <a href="https://icdar2023.org/">
+          International Conference on Document Analysis and Recognition<EM></EM>
+        </a>
+      </TD>
+      <TD>Libreria</TD>
+    </TR>    
+
+    <TR>
+      <TD scope="row">16</TD>
+      <TD>
+        <a href="http://weocr.ocrgrid.org/">
+          WeOCR<EM></EM>
+        </a>
+      </TD>
+      <TD>Libreria</TD>
+    </TR>   
+
+    <TR>
+      <TD scope="row">17</TD>
+      <TD>
+        <a href="https://github.com/ocropus/ocropy">
+          OCRopus<EM></EM>
+        </a>
+      </TD>
+      <TD>Libreria</TD>
+    </TR>  
+
+  </TABLE>
+</div>
+<div class="col-12 align-self-start">
+  <p>Por: JMSF</p>
+</div>
+</div>
+
 {% endblock %}
