@@ -146,7 +146,7 @@ def uploader():
                     kyw,akyw,yr,se,re=palc.palabr_c(ruta,fn+nu,3) 
                     mkyw.append(kyw)                                  # Agrega palabras clave
                 mnum.append(n)
-                mn.append(nu)
+                mn.append("Alg-"+nu)
                 ti.append("Imagen Algoritmo 1")
             if int(s)==2:                                             # Alg 2 - Prepr
                 nu="2"
@@ -167,7 +167,7 @@ def uploader():
                     kyw,akyw,yr,se,re=palc.palabr_c(ruta,fn+nu,3) 
                     mkyw.append(kyw)                                  # Agrega palabras clave
                 mnum.append(n)
-                mn.append(nu)
+                mn.append("Alg-"+nu)
                 ti.append("Imagen Algoritmo 2")
             if int(s)==3:                                             # Alg 3 - Prepr
                 nu="3"
@@ -188,7 +188,7 @@ def uploader():
                     kyw,akyw,yr,se,re=palc.palabr_c(ruta,fn+nu,3) 
                     mkyw.append(kyw)                                  # Agrega palabras clave
                 mnum.append(n)
-                mn.append(nu)
+                mn.append("Alg-"+nu)
                 ti.append("Imagen Algoritmo 3")
             n += 1
             print("mtxt: ",mtxt)
@@ -200,7 +200,9 @@ def uploader():
             print("Alg Nu: ",mn)
     pr+=1    
     print("prueba: ",pr)
-    fng=est.est_graf(mn, mp,fn,ruta)
+    fng=""
+    if len(mn)>0 and len(mp)>0:
+        fng=est.est_graf(mn, mp,fn,ruta)
     return render_template("codigo2.html", app_data=app_data, fn1=mimg, txt=mtxt,tcorr=mpst,plbc=mkyw,nu=mnum,ti=ti,pr=pr,su2=su2,fng=fng)
 
 def ocrt(fn,img,nu):

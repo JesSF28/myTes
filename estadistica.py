@@ -1,3 +1,4 @@
+# TESIS: Doctorado Jesús Martín Silva Fernández
 import re
 import matplotlib.pyplot as plt
 import os
@@ -76,6 +77,9 @@ def est_graf(x, y,fn,ruta):
     # Gráfico de barras
     fig, ax = plt.subplots()
     ax.bar(x = x, height = y, color = colores)
+    ax.set_title("EVALUACION: % de palabras reemplazadas")
+    ax.set_xlabel("Algoritmos de Corrección")
+    ax.set_ylabel("Porcentaje %")
     fn1=os.path.join(ruta, fn+"g.jpg")
     plt.savefig(fn1, dpi=100, bbox_inches='tight')
     plt.close()

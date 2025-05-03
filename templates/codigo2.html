@@ -4,6 +4,14 @@
     {% set languages = ["HTML", "CSS", "Javascript", "Python", "Ruby", "PHP", "Java"] %}
 
     <form action="/codigo" enctype="multipart/form-data">
+
+        <div class="columnas">
+            {% if fng!="" %}
+                <div class="columna" style="width: 75%;">
+            {% else %}
+                <div class="columna" style="width: 100%;">
+            {% endif %}
+
         <h1>RESULTADOS DE PRUEBA: {{pr}} </h1>
 
         <div class="container-fluid row">
@@ -44,12 +52,19 @@
     
         </div>
     </div>
+    <p><input type="submit" value="Otra prueba"></p>
+    </div>
 
-    <!--a href="templates/codigo1.html">Regresar</a-->
-        <p><input type="submit" value="Otra prueba"></p>
+    <div class="columna" style="width: 25%;">
+        <!--a href="templates/codigo1.html">Regresar</a-->
+        {% if fng!="" %}
         <figure>
             <figcaption style="text-align: center;"><code>Estadística</code></figcaption>
-            <img src="{{ fng }}" alt="Imagen" class="image" alt="IMAGEN 1">
+            <img src="{{ fng }}" alt="Imagen" class="image2" alt="IMAGEN 1" width="400" 
+            height="500">
         </figure>
+        {% endif %}
+    </div>
+    </div>
     </form>
 {% endblock %}
