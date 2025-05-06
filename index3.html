@@ -1,0 +1,22 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <script>
+      function toggle(source) {
+        checkboxes = document.getElementsByName('act');
+        for(var i=0, n=checkboxes.length;i<n;i++) {
+          checkboxes[i].checked = source.checked;
+        }
+      }      
+    </script>
+
+    <input type="checkbox" onClick="toggle(this)" /> Seleccionar/Deseleccionar todos<br><br>
+
+    <input type="checkbox" name="dinamico" > 1<br/>
+    <input type="checkbox" name="dinamico" > 2<br/>
+    <input type="checkbox" name="dinamico" > 3<br/>
+    <input type="checkbox" name="dinamico" > 4<br/>
+
+  </body>
+</html>

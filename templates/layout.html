@@ -13,17 +13,20 @@
     <!-- Bootstrap core CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="index3.js"></script>   
+
     <style>
       .container {
           display: flex;
           align-items: center; /* Alinea verticalmente los elementos */
       }
       .image {
-          width: 200px;
-          height: 150px;
+          width: 300px;
+          height: 220px;
           margin-right: 20px;
           border: 2px solid black; 
           border-radius: 10px;
+          overflow-y: scroll; 
       }
       .image2 {
           width: 250px;
@@ -44,13 +47,15 @@
           margin: 0 auto;
       }
       .text {
-          width: 200px;
-          height: 150px;
+          width: 300px;
+          height: 220px;
           font-size: 12px;
           margin-right: 20px;
           border: 2px solid black; 
           border-radius: 10px;
           font-family: Arial, sans-serif;
+          overflow-x: hidden; 
+          overflow-y: scroll; 
       }
       .columnas {
           display: flex;
@@ -58,7 +63,7 @@
       }
       .columna {
           width: 48%; /* Ajusta el ancho de cada columna */
-          margin-right: 2%; /* Espacio entre las columnas */
+          margin-right: 1%; /* Espacio entre las columnas */
         /*  opcionalmente, puedes agregar más estilo a cada columna, como padding, etc. */
       }
       .este {
