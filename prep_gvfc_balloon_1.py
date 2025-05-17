@@ -12,7 +12,7 @@ import matplotlib.animation as animation
 
 from math import acos
 from scipy.ndimage import laplace as del2
-from skimage.segmentation import active_contour
+#from skimage.segmentation import active_contour
 
 from flask import Flask, render_template, request
 from werkzeug.utils  import secure_filename

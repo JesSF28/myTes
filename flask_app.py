@@ -20,10 +20,11 @@ try:
     import Image
 except ImportError:
     from PIL import Image
-import prep_gvfc_balloon_1 as prp1
-import prep_gvfc_balloon_2 as prp2
-import post_pnorv_1 as postp1
-import palabr_clave as palc
+import prep_gvfc_balloon_1 as prp1       # Algoritmo Preproceso 1
+import prep_gvfc_balloon_2 as prp2       # Algoritmo Preproceso 2
+import post_pnorv_1 as postp1            # Algoritmo Postproceso
+import palabr_clave as palc              # Algoritmo Palabras clave
+import estadistica as est                # Conteo estadistica
 
 DEVELOPMENT_ENV = True
 
@@ -49,15 +50,16 @@ def index():
 
 @app.route("/resumen")
 def about():
-    return render_template("resumen.html", app_data=app_data)
+    return render_template("jsf_res_tesis_1_0.html", app_data=app_data)
 
 @app.route("/presenta")
 def presenta():
-    return render_template("presenta.html", app_data=app_data)
+#    return render_template("presenta.html", app_data=app_data)
+    return render_template("jsf_pres_tesis_0_1.html", app_data=app_data)
 
 @app.route("/documento")
 def service():
-    return render_template("jsf_tesis_tx_.html", app_data=app_data)
+    return render_template("jsf_doc_tesis_14_0.html", app_data=app_data)
 
 @app.route("/codigo")
 def codigo():
@@ -84,7 +86,9 @@ def uploader():
         if oimg=='Otra Imagen':
             filename=""
             return render_template("codigo1.html", app_data=app_data, fn=filename)
-        ruta="static"
+#        ruta0="assets"
+        ruta0="static"
+        ruta1="static/result"
         if filename=="":
             f = request.files['archivo']
 #        f = request.FILES['ufile'].file.name
@@ -92,12 +96,14 @@ def uploader():
             if filename=="":
                return render_template("codigo1.html", app_data=app_data, fn=filename)
                 
-        filename1 = os.path.join(ruta, filename)         # Ruta+nom Arch
+        filename0 = os.path.join(ruta0, filename)         # Ruta+nom Arch origen
+        filename1 = os.path.join(ruta1, filename)         # Ruta+nom Arch destino
         fn,ex = os.path.splitext(filename)               # Nom Arch, Ext
         print("filename: ",filename)
+        print("filename0: ",filename0)
         print("filename1: ",filename1)
         print("Long filename: ",len(filename))
-        imagen = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)
+        imagen = cv2.imread(filename0, cv2.IMREAD_GRAYSCALE)
 
         su =  request.form.getlist("act")
         su2 = request.form.getlist("act2")
@@ -107,52 +113,87 @@ def uploader():
         mnum = []
         mpst = []
         mkyw = []
+
+        mtp=[]
+        mtc=[]
+        mp= []
+        mn= []
         n=0
         ti=[]
         for s in su:
             print(int(s))
             if int(s)==0:
                 nu="0"
-                mimg.append(filename1)                                # Nomb imagen original
-                if "3" in su2: mtxt.append(ocrt(fn,imagen,nu))        # Agrega texto de ocr 0
-                if "4" in su2: mpst.append(postp1.palabr(ruta,fn+nu)) # Agrega texto corregido
+                mimg.append(filename0)                                # Nomb imagen original
+                if "3" in su2: mtxt.append(ocrt(fn,imagen,nu,ruta1))        # Agrega texto de ocr 0
+                if "4" in su2: mpst.append(postp1.palabr(ruta1,fn+nu)) # Agrega texto corregido
                 if "5" in su2: 
-                    kyw,akyw,yr,se,re=palc.palabr_c(ruta,fn+nu,3) 
+                    kyw,akyw,yr,se,re=palc.palabr_c(ruta1,fn+nu,3) 
                     mkyw.append(kyw)                                  # Agrega palabras clave
                 mnum.append(n)                                        # Agrega Num opcion
                 ti.append("Imagen Original")                          # Agrega titulo Imagen
-            if int(s)==1:       
+            if int(s)==1:                                             # Alg 1 - Prepr       
                 nu="1"
-                img,fn1 = prp1.preproc(imagen,fn+nu,ruta)      
+                img,fn1 = prp1.preproc(imagen,fn+nu,ruta1)      
                 mimg.append(fn1)                                      # preproceso 1
-                if "3" in su2: mtxt.append(ocrt(fn,img,nu))           # ocr 1
-                if "4" in su2: mpst.append(postp1.palabr(ruta,fn+nu)) # Txt corregido 1
+                tx1=""
+                if "3" in su2: 
+                    tx1=ocrt(fn,img,nu,ruta1)                               # ocr 1
+                    mtxt.append(tx1)           
+                if "4" in su2: 
+                    tx2=postp1.palabr(ruta1,fn+nu)
+                    mpst.append(tx2)                                  # Txt corregido 1
+                    tp,tc,p=est.gen_estad(tx1, tx2)                   # Estadística
+                    mtp.append(tp)
+                    mtc.append(tc)
+                    mp.append(p)
                 if "5" in su2: 
-                    kyw,akyw,yr,se,re=palc.palabr_c(ruta,fn+nu,3) 
+                    kyw,akyw,yr,se,re=palc.palabr_c(ruta1,fn+nu,3) 
                     mkyw.append(kyw)                                  # Agrega palabras clave
                 mnum.append(n)
+                mn.append("Alg-"+nu)
                 ti.append("Imagen Algoritmo 1")
-            if int(s)==2:       
+            if int(s)==2:                                             # Alg 2 - Prepr
                 nu="2"
-                img,fn2 = prp2.preproc2(imagen,fn,nu,ruta)     
-                mimg.append(fn2)                                      # preproceso 2
-                if "3" in su2: mtxt.append(ocrt(fn,img,nu))           # ocr 2
-                if "4" in su2: mpst.append(postp1.palabr(ruta,fn+nu)) # Txt corregido 2
-                if "5" in su2: 
-                    kyw,akyw,yr,se,re=palc.palabr_c(ruta,fn+nu,3) 
-                    mkyw.append(kyw)                                  # Agrega palabras clave
-                mnum.append(n)
-                ti.append("Imagen Algoritmo 2")
-            if int(s)==3:       
-                nu="3"
-                img,fn2 = prp2.preproc2(imagen,fn,nu,ruta)            # preproceso 3
+                img,fn2 = prp2.preproc2(imagen,fn,nu,ruta1)     
                 mimg.append(fn2)
-                if "3" in su2: mtxt.append(ocrt(fn,img,nu))           # ocr 3
-                if "4" in su2: mpst.append(postp1.palabr(ruta,fn+nu)) # Txt corregido 3
+                tx1=""                                      
+                if "3" in su2:
+                    tx1=ocrt(fn,img,nu,ruta1)                               # ocr 2
+                    mtxt.append(tx1)           
+                if "4" in su2:
+                    tx2=postp1.palabr(ruta1,fn+nu)                     # postpoceso
+                    mpst.append(tx2)                                  # Txt corregido 2
+                    tp,tc,p=est.gen_estad(tx1, tx2)                   # Estadística
+                    mtp.append(tp)
+                    mtc.append(tc)
+                    mp.append(p)
                 if "5" in su2: 
-                    kyw,akyw,yr,se,re=palc.palabr_c(ruta,fn+nu,3) 
+                    kyw,akyw,yr,se,re=palc.palabr_c(ruta1,fn+nu,3) 
                     mkyw.append(kyw)                                  # Agrega palabras clave
                 mnum.append(n)
+                mn.append("Alg-"+nu)
+                ti.append("Imagen Algoritmo 2")
+            if int(s)==3:                                             # Alg 3 - Prepr
+                nu="3"
+                img,fn2 = prp2.preproc2(imagen,fn,nu,ruta1)            # preproceso 3
+                mimg.append(fn2)
+                tx1=""
+                if "3" in su2: 
+                    tx1=ocrt(fn,img,nu,ruta1)                               # ocr 3
+                    mtxt.append(tx1)           
+                if "4" in su2: 
+                    tx2=postp1.palabr(ruta1,fn+nu)                     # Txt corregido 3
+                    mpst.append(tx2)                                  
+                    tp,tc,p=est.gen_estad(tx1, tx2)                   # Estadística
+                    mtp.append(tp)
+                    mtc.append(tc)
+                    mp.append(p)
+                if "5" in su2: 
+                    kyw,akyw,yr,se,re=palc.palabr_c(ruta1,fn+nu,3) 
+                    mkyw.append(kyw)                                  # Agrega palabras clave
+                mnum.append(n)
+                mn.append("Alg-"+nu)
                 ti.append("Imagen Algoritmo 3")
             n += 1
             print("mtxt: ",mtxt)
@@ -160,15 +201,19 @@ def uploader():
             print("mnum: ",mnum)
             print("mpst: ",mpst)
             print("mkyw: ",mkyw)
+            print("% corr: ",mp)
+            print("Alg Nu: ",mn)
     pr+=1    
     print("prueba: ",pr)
+    fng=""
+    if len(mn)>0 and len(mp)>0:
+        fng=est.est_graf(mn, mp,fn,ruta1)
+    return render_template("codigo2.html", app_data=app_data, fn1=mimg, txt=mtxt,tcorr=mpst,plbc=mkyw,nu=mnum,ti=ti,pr=pr,su2=su2,fng=fng)
 
-    return render_template("codigo2.html", app_data=app_data, fn1=mimg, txt=mtxt,tcorr=mpst,plbc=mkyw,nu=mnum,ti=ti,pr=pr,su2=su2)
-
-def ocrt(fn,img,nu):
+def ocrt(fn,img,nu,ruta1):
     pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
     txt = pytesseract.image_to_string(img)                                    # Genera texto
-    tx = open (os.path.join('static',fn+nu+".txt"),'w', encoding="utf-8")
+    tx = open (os.path.join(ruta1,fn+nu+".txt"),'w', encoding="utf-8")
     tx.write(txt)
     tx.close()
     return txt

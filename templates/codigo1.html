@@ -6,7 +6,7 @@
     <form action="/uploader" method="POST" enctype="multipart/form-data">
     {% if fn=="" %}
         <h2>Seleccionar imagen de texto: </h2>
-        <input type="file" name="archivo">
+        <input type="file" name="archivo" />
     {% else %}
         <h2>Imagen de texto seleccionada: </h2>
         <div> {{ fn }} </div>

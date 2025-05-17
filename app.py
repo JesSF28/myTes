@@ -50,15 +50,16 @@ def index():
 
 @app.route("/resumen")
 def about():
-    return render_template("resumen.html", app_data=app_data)
+    return render_template("jsf_res_tesis_1_0.html", app_data=app_data)
 
 @app.route("/presenta")
 def presenta():
-    return render_template("presenta.html", app_data=app_data)
+#    return render_template("presenta.html", app_data=app_data)
+    return render_template("jsf_pres_tesis_0_1.html", app_data=app_data)
 
 @app.route("/documento")
 def service():
-    return render_template("jsf_tesis_tx_.html", app_data=app_data)
+    return render_template("jsf_doc_tesis_14_0.html", app_data=app_data)
 
 @app.route("/codigo")
 def codigo():
