@@ -20,6 +20,7 @@ try:
     import Image
 except ImportError:
     from PIL import Image
+import time
 import prep_gvfc_balloon_1 as prp1       # Algoritmo Preproceso 1
 import prep_gvfc_balloon_2 as prp2       # Algoritmo Preproceso 2,3
 import prep_chan_vese_s_1 as prp4        # Algoritmo Preproceso 4
@@ -119,8 +120,9 @@ def uploader():
 
         mtp=[]
         mtc=[]
-        mp= []
-        mn= []
+        mp= []                                                        # % palbr corregidas
+        mt= []                                                        # Tiempo miliseg
+        mn= []                                                        # Nomb Alg
         n=0
         ti=[]
         for s in su:
@@ -137,7 +139,9 @@ def uploader():
                 ti.append("Imagen Original")                          # Agrega titulo Imagen
             if int(s)==1:                                             # Alg 1 - Prepr       
                 nu="1"
-                img,fn1 = prp1.preproc(imagen,fn+nu,ruta1)      
+                t1=tiempo("l")
+                img,fn1 = prp1.preproc(imagen,fn+nu,ruta1)
+                mt.append(tiempo("l")-t1)      
                 mimg.append(fn1)                                      # preproceso 1
                 tx1=""
                 if "3" in su2: 
@@ -158,7 +162,9 @@ def uploader():
                 ti.append("Imagen Algoritmo 1")
             if int(s)==2:                                             # Alg 2 - Prepr
                 nu="2"
+                t1=tiempo("l")
                 img,fn2 = prp2.preproc2(imagen,fn,nu,ruta1)     
+                mt.append(tiempo("l")-t1)      
                 mimg.append(fn2)
                 tx1=""                                      
                 if "3" in su2:
@@ -179,7 +185,9 @@ def uploader():
                 ti.append("Imagen Algoritmo 2")
             if int(s)==3:                                             # Alg 3 - Prepr
                 nu="3"
+                t1=tiempo("l")
                 img,fn2 = prp2.preproc2(imagen,fn,nu,ruta1)            # preproceso 3
+                mt.append(tiempo("l")-t1)      
                 mimg.append(fn2)
                 tx1=""
                 if "3" in su2: 
@@ -203,7 +211,9 @@ def uploader():
                 multiple=False
                 num=20
                 imagen1 = cv2.imread(filename0, 1)
+                t1=tiempo("l")
                 img,fn2 = prp4.ChanVeseSegmentation(imagen1,fn+nu,ruta1,multiple,num) # preproceso 4
+                mt.append(tiempo("l")-t1)      
                 mimg.append(fn2)
                 tx1=""
                 if "3" in su2: 
@@ -232,10 +242,12 @@ def uploader():
             print("Alg Nu: ",mn)
     pr+=1    
     print("prueba: ",pr)
-    fng=""
+    fng1=""
+    fng2=""
     if len(mn)>0 and len(mp)>0:
-        fng=est.est_graf(mn, mp,fn,ruta1)
-    return render_template("codigo2.html", app_data=app_data, fn1=mimg, txt=mtxt,tcorr=mpst,plbc=mkyw,nu=mnum,ti=ti,pr=pr,su2=su2,fng=fng)
+        fng1=est.est_graf("1",mn, mp,fn,ruta1,"EVALUACION: % de palabras reemplazadas")                       # Grafico % palbrs corregidas
+        fng2=est.est_graf("2",mn, mt,fn,ruta1,"EVALUACION: tiempo miliseg proceso")                       # Gráfico tiempo x alg
+    return render_template("codigo2.html", app_data=app_data, fn1=mimg, txt=mtxt,tcorr=mpst,plbc=mkyw,nu=mnum,ti=ti,pr=pr,su2=su2,fng1=fng1,fng2=fng2)
 
 def ocrt(fn,img,ruta1):
     pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
@@ -246,6 +258,17 @@ def ocrt(fn,img,ruta1):
     tx.write(txt)
     tx.close()
     return txt
+
+def tiempo(t):                              # h=hora,m=minuto,s=segundo,l=milisegundo
+    if t=="l":
+        tt = time.time()*1000
+    elif t=="s":
+        tt = time.time()
+    elif t=="m":
+        tt = datetime.datetime.now().minute
+    else:
+        tt = datetime.datetime.now().hour
+    return tt
 
 if __name__ == "__main__":
     app.run(debug=DEVELOPMENT_ENV)

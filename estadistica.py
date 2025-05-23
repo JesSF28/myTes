@@ -67,7 +67,7 @@ def contar_plbr_dicc(texto, diccionario):
 
 #print(conteo)
 
-def est_graf(x, y,fn,ruta):
+def est_graf(nn,x, y,fn,ruta,tit):
 # Datos
 #x = ["A", "B", "C"]
 #y = [3, 5, 1]
@@ -77,10 +77,10 @@ def est_graf(x, y,fn,ruta):
     # Gráfico de barras
     fig, ax = plt.subplots()
     ax.bar(x = x, height = y, color = colores)
-    ax.set_title("EVALUACION: % de palabras reemplazadas")
+    ax.set_title(tit)
     ax.set_xlabel("Algoritmos de Corrección")
     ax.set_ylabel("Porcentaje %")
-    fn1=os.path.join(ruta, fn+"g.jpg")
+    fn1=os.path.join(ruta, fn+"g"+nn+".jpg")
     plt.savefig(fn1, dpi=100, bbox_inches='tight')
     plt.close()
     return fn1
