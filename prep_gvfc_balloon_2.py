@@ -1,4 +1,5 @@
 # TESIS: Doctorado Jesús Martín Silva Fernández
+# Mayo 2025
 import os
 import csv
 import cv2
@@ -102,7 +103,7 @@ def preproc2(image,fn,n,ruta):
 	#Funcion Binaria
 	_, binaria_otsu = cv2.threshold(image, 100, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 	imagen_binaria = (binaria_otsu // 255).astype(np.uint8)
-	imagen_binaria = imagen_binaria[::-1]
+	imagen_binaria = imagen_binaria[::-1]            # matriz invertida
 
 	#Calculo GVF
 	gvf_u, gvf_v = calculate_gvf(imagen_binaria, mu, gvf_iterations,kappa_1)

@@ -1,4 +1,5 @@
 # TESIS: Doctorado Jesús Martín Silva Fernández
+# Mayo 2025
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -52,12 +53,12 @@ def index():
 
 @app.route("/resumen")
 def about():
-    return render_template("jsf_res_tesis_1_0.html", app_data=app_data)
+    return render_template("jsf_res_tesis_1_1.html", app_data=app_data)
 
 @app.route("/presenta")
 def presenta():
 #    return render_template("presenta.html", app_data=app_data)
-    return render_template("jsf_pres_tesis_0_1.html", app_data=app_data)
+    return render_template("jsf_pres_tesis_0_2.html", app_data=app_data)
 
 @app.route("/documento")
 def service():
@@ -67,6 +68,10 @@ def service():
 def codigo():
     global filename
     return render_template("codigo1.html", app_data=app_data, fn=filename)
+
+@app.route("/lote")
+def lote():
+    return render_template("codigo3.html", app_data=app_data)
 
 @app.route("/recursos")
 def recursos():
@@ -110,8 +115,6 @@ def uploader():
 
         su =  request.form.getlist("act")
         su2 = request.form.getlist("act2")
-        print("*****su :",su)
-        print("*****su2:",su2)
         mtxt = []
         mimg = []
         mnum = []
@@ -125,6 +128,7 @@ def uploader():
         mn= []                                                        # Nomb Alg
         n=0
         ti=[]
+        alg = ["","gvf-snake","Umb-Otsu","gvf+Trnf","Chan-Vese"]
         for s in su:
             print(int(s))
             if int(s)==0:                                             # Imagen original
@@ -158,7 +162,7 @@ def uploader():
                     kyw,akyw,yr,se,re=palc.palabr_c(ruta1,fn+nu,3) 
                     mkyw.append(kyw)                                  # Agrega palabras clave
                 mnum.append(n)
-                mn.append("Alg-"+nu)
+                mn.append(nu+":"+alg[int(nu)])
                 ti.append("Imagen Algoritmo 1")
             if int(s)==2:                                             # Alg 2 - Prepr
                 nu="2"
@@ -181,7 +185,7 @@ def uploader():
                     kyw,akyw,yr,se,re=palc.palabr_c(ruta1,fn+nu,3) 
                     mkyw.append(kyw)                                  # Agrega palabras clave
                 mnum.append(n)
-                mn.append("Alg-"+nu)
+                mn.append(nu+":"+alg[int(nu)])
                 ti.append("Imagen Algoritmo 2")
             if int(s)==3:                                             # Alg 3 - Prepr
                 nu="3"
@@ -204,7 +208,7 @@ def uploader():
                     kyw,akyw,yr,se,re=palc.palabr_c(ruta1,fn+nu,3) 
                     mkyw.append(kyw)                                  # Agrega palabras clave
                 mnum.append(n)
-                mn.append("Alg-"+nu)
+                mn.append(nu+":"+alg[int(nu)])
                 ti.append("Imagen Algoritmo 3")
             if int(s)==4:                                                           # Alg 4 - Prepr Chanvese
                 nu="4"
@@ -230,7 +234,7 @@ def uploader():
                     kyw,akyw,yr,se,re=palc.palabr_c(ruta1,fn+nu,3) 
                     mkyw.append(kyw)                                  # Agrega palabras clave
                 mnum.append(n)
-                mn.append("Alg-"+nu)
+                mn.append(nu+":"+alg[int(nu)])
                 ti.append("Imagen Algoritmo 4")
             n += 1
             print("mtxt: ",mtxt)

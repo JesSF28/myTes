@@ -1,3 +1,5 @@
+# TESIS: Doctorado Jesús Martín Silva Fernández
+# Mayo 2025
 import sys
 import os
 import cv2
