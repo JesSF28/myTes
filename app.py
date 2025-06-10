@@ -163,7 +163,7 @@ def uploader():
                     mkyw.append(kyw)                                  # Agrega palabras clave
                 mnum.append(n)
                 mn.append(nu+":"+alg[int(nu)])
-                ti.append("Imagen Algoritmo 1")
+                ti.append("Resultados Algoritmo 1: "+alg[int(nu)])
             if int(s)==2:                                             # Alg 2 - Prepr
                 nu="2"
                 t1=tiempo("l")
@@ -186,7 +186,7 @@ def uploader():
                     mkyw.append(kyw)                                  # Agrega palabras clave
                 mnum.append(n)
                 mn.append(nu+":"+alg[int(nu)])
-                ti.append("Imagen Algoritmo 2")
+                ti.append("Resultados Algoritmo 2: "+alg[int(nu)])
             if int(s)==3:                                             # Alg 3 - Prepr
                 nu="3"
                 t1=tiempo("l")
@@ -209,7 +209,7 @@ def uploader():
                     mkyw.append(kyw)                                  # Agrega palabras clave
                 mnum.append(n)
                 mn.append(nu+":"+alg[int(nu)])
-                ti.append("Imagen Algoritmo 3")
+                ti.append("Resultados Algoritmo 3: "+alg[int(nu)])
             if int(s)==4:                                                           # Alg 4 - Prepr Chanvese
                 nu="4"
                 multiple=False
@@ -235,7 +235,7 @@ def uploader():
                     mkyw.append(kyw)                                  # Agrega palabras clave
                 mnum.append(n)
                 mn.append(nu+":"+alg[int(nu)])
-                ti.append("Imagen Algoritmo 4")
+                ti.append("Resultados Algoritmo 4: "+alg[int(nu)])
             n += 1
             print("mtxt: ",mtxt)
             print("mimg: ",mimg)

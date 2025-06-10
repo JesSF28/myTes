@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    <h1>Prueba en Lote</h1>
+    <h2>Seleccionar archivos a procesar: </h2>
+    <form action="/uploader2" method="POST" enctype="multipart/form-data">
+        <input type="file" id="lote" name="lote">
+        <input type="submit" value="Procesar" name="lote2">
+    </form>
+{% endblock %}
